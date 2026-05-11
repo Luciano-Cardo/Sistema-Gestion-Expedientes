@@ -1,4 +1,5 @@
 using SGE.Dominio.Comun;
+using SGE.Dominio.Tramites;
 
 namespace SGE.Dominio.Expedientes;
 
@@ -54,8 +55,28 @@ public class Expediente
     }
 
     //Cambia automatico
-    public bool ActualizarEstado()
+    public bool ActualizarEstado(EtiquetaTramite? ultimaEtiqueta, Guid idUsuario)
     {
+        bool ok = true;
+        switch (ultimaEtiqueta)
+        {
+            case EtiquetaTramite.Resolucion :
+                CambiarEstado(EstadoExpediente.ConResolucion, idUsuario);
+                break;
+            case EtiquetaTramite.PaseAEstudio:
+                CambiarEstado(EstadoExpediente.ParaResolver, idUsuario);
+                break;
+            case EtiquetaTramite.PaseAlArchivo:
+                CambiarEstado(EstadoExpediente.Finalizado, idUsuario);
+                break;
+            case null: 
+                CambiarEstado(EstadoExpediente.RecienIniciado, idUsuario);
+                break;
+            default:
+                ok = false;
+                break;
+        }
+        return ok;
         
     }
 }
