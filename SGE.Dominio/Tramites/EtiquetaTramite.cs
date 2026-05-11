@@ -7,5 +7,5 @@ public enum EtiquetaTramite
     Despacho,
     Resolucion,
     Notificacion,
-    PaseAlArchivo
+    PaseAlArchivo,
 }
