@@ -55,11 +55,15 @@ public class Expediente
     }
 
     //Cambia automatico
+    /*
+        Que pasaria en la situacion en la cual recibas un estado de tramite X y el estado del expediente sea FINALIZADO.
+    */
     public bool ActualizarEstado(EtiquetaTramite? ultimaEtiqueta, Guid idUsuario)
     {
         bool ok = true;
         switch (ultimaEtiqueta)
         {
+            
             case EtiquetaTramite.Resolucion :
                 CambiarEstado(EstadoExpediente.ConResolucion, idUsuario);
                 break;
