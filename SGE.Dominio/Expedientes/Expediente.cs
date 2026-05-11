@@ -1,0 +1,61 @@
+using SGE.Dominio.Comun;
+
+namespace SGE.Dominio.Expedientes;
+
+public class Expediente
+{
+    public Guid Id { get; private set; }
+    public Caratula Caratula { get; private set; }
+    public DateTime FechaCreacion { get; private set; }
+    public DateTime FechaUltimaModificacion { get; private set; }
+    public Guid UsuarioUltimoCambio { get; private set; }
+    public EstadoExpediente Estado { get; private set; }
+
+    //Constructor
+    public Expediente(Caratula caratula, Guid usuarioUltimoCambio)
+    {
+        Id = Guid.NewGuid();
+        Caratula = caratula;
+        UsuarioUltimoCambio = usuarioUltimoCambio;
+        FechaCreacion = DateTime.Now;
+        FechaUltimaModificacion = DateTime.Now;
+        Estado = EstadoExpediente.RecienIniciado;
+    }
+
+    // Factory Method
+    public static Expediente Reconstruir(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion,
+                                         Guid usuarioUltimoCambio, EstadoExpediente estado)
+    {
+        if (fechaUltimaModificacion < fechaCreacion)
+            throw new DominioException("La fecha de modificacion no puede ser menor que la fecha de creacion.");
+        return new Expediente(caratula, usuarioUltimoCambio)
+        {
+            Id = id, 
+            FechaCreacion = fechaCreacion, 
+            FechaUltimaModificacion = fechaUltimaModificacion, 
+            Estado = estado
+        };
+    }
+
+    //Modificar caratula
+    public void ModificarCaratula(Caratula nuevaCaratula, Guid idUsuario)
+    {
+        Caratula = nuevaCaratula;
+        UsuarioUltimoCambio = idUsuario;    
+        FechaUltimaModificacion = DateTime.Now;
+    }
+
+    //Cambio manual
+    public void CambiarEstado(EstadoExpediente nuevoEstado, Guid idUsuario)
+    {
+        Estado = nuevoEstado;
+        UsuarioUltimoCambio = idUsuario;
+        FechaUltimaModificacion = DateTime.Now;
+    }
+
+    //Cambia automatico
+    public bool ActualizarEstado()
+    {
+        
+    }
+}
