@@ -1,9 +1,6 @@
-using System;
-using System.ComponentModel;
 using SGE.Dominio.Expedientes;
-using SGE.Dominio.Tramites;
 
-namespace SGE.Aplicacion.Interfaces;
+namespace SGE.Aplicacion;
 
 public interface IExpedienteRepository
 {
