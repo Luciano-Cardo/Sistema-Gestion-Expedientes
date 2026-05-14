@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Autorizacion\" />
+    <Folder Include="Comun\" />
   </ItemGroup>
 
 </Project>
