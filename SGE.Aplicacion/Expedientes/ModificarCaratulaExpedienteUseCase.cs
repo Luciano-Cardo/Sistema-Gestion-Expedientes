@@ -16,7 +16,9 @@ public class ModificarCaratulaExpedienteUseCase
 
     public ModificarCaratulaExpedienteResponse Ejecutar(ModificarCaratulaExpedienteRequest request)
     {
-        if (!_autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.ExpedienteModificacion)){
+
+        if (!_autorizacion.PoseeElPermiso(request.Id, Permiso.ExpedienteModificacion)){
+
             throw new AutorizacionException("El usuario no posee la autorizacion");
         }
 
@@ -27,12 +29,14 @@ public class ModificarCaratulaExpedienteUseCase
             throw new EntidadNoEncontradaException("El expediente solicitado no existe");
         }
 
-        var caratula = new Caratula(request.Caratula);
 
-        expediente.ModificarCaratula(caratula, request.IdUsuario);
+        var caratula = new Caratula(request.NuevaCaratula);
+
+        expediente.ModificarCaratula(caratula, request.Id);
 
         _expRepo.Modificar(expediente);
 
-        return new ModificarCaratulaExpedienteResponse(request.Id, request.Caratula, expediente.FechaUltimaModificacion);
+        return new ModificarCaratulaExpedienteResponse(request.Id, caratula , expediente.FechaUltimaModificacion);
     }
 }
+
