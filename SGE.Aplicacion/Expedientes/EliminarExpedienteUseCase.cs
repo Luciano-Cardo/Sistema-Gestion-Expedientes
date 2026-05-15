@@ -18,6 +18,7 @@ public class EliminarExpedienteUseCase
 
     public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request)
     {
+
         if (!_autorizacion.PoseeElPermiso(request.Id, Permiso.ExpedienteBaja))
         {
             throw new AutorizacionException("El usuario no posee la autorizacion");
@@ -33,4 +34,5 @@ public class EliminarExpedienteUseCase
 
         return new EliminarExpedienteResponse(request.Id);
     }
+
 }
