@@ -77,8 +77,8 @@ SGE.Aplicacion/
   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
   SGE.Aplicacion.AssemblyInfo.cs
   SGE.Aplicacion.GlobalUsings.g.cs
+ Servicios/ActualizacionEstadoExpedienteService.cs
  Tramites/
-  ActualizacionEstadoExpedienteServic.cs
   AgregarTramiteUseCase.cs
   EliminarTramiteUseCase.cs
   ITramiteRepository.cs
