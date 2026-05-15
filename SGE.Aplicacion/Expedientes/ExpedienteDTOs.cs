@@ -9,7 +9,7 @@ public record AgregarExpedienteResponse(Guid id);
 public record EliminarExpedienteRequest(Guid Id, Guid UsuarioUltimoCambio);
 public record EliminarExpedienteResponse(Guid Id);
 
-public record ModificarCaratulaExpedienteRequest(Guid Id, Caratula NuevaCaratula, Guid UsuarioUltimoCambio);
+public record ModificarCaratulaExpedienteRequest(Guid Id, String NuevaCaratula, Guid UsuarioUltimoCambio);
 public record ModificarCaratulaExpedienteResponse(Guid Id, Caratula Caratula, DateTime FechaUltimaModificacion);
 
 public record CambiarEstadoExpedienteRequest(Guid Id, EstadoExpediente NuevoEstado, Guid UsuarioUltimoCambio);
