@@ -5,24 +5,28 @@ namespace SGE.Aplicacion.Expedientes;
 
 public class AgregarExpedienteUseCase
 {
-    private IExpedienteRepository _repo;
-    private IAutorizacionService _autorizacion;
+    private readonly IExpedienteRepository _repo;
+    private readonly IAutorizacionService _autorizacion;
     public AgregarExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion)
     {
         _repo = repo;
         _autorizacion = autorizacion;
     }
 
-    public void Ejecutar(Expediente expediente, Guid idUsuario)
+    public  AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
-        if (!_autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
+        if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteAlta))
         {
            throw new AutorizacionException("El usuario no posee la autorizacion");
         }
+        
+        var nuevoExpediente = new Expediente(request.Caratula,request.UsuarioUltimoCambio); 
 
-        _repo.Agregar(expediente);
+        _repo.Agregar(nuevoExpediente);
 
-
-
+        return new AgregarExpedienteResponse(nuevoExpediente.Id);
     }
+
+
+
 }

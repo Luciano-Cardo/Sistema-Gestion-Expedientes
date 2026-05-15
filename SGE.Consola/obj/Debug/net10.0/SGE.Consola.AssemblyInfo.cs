@@ -14,10 +14,14 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac1b0de9c0bdd16d9a31a8229721c0535287518b")]
 =======
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d251cd2ac57ee390d6b06d53ad584b8d3542391c")]
 >>>>>>> main
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+548e7c0422ab7bcab50e9a7f98b607e8b5aa946d")]
+>>>>>>> 16c6ffbc5bda4ab8599a28574600b638ba6b7351
 [assembly: System.Reflection.AssemblyProductAttribute("SGE.Consola")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGE.Consola")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
