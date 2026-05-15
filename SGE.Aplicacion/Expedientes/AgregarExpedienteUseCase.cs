@@ -20,11 +20,8 @@ public class AgregarExpedienteUseCase
 
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
-        if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteAlta))
-
-        {
-            throw new AutorizacionException("El usuario no posee la autorización");
-        }
+        if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteAlta)) throw new AutorizacionException("El usuario no posee la autorización");
+        
         
         var caratula = new Caratula(request.Caratula);
 
