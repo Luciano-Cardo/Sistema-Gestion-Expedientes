@@ -1,3 +1,4 @@
+using SGE.Dominio.Expedientes;
 using SGE.Dominio.Comun;
 
 namespace SGE.Dominio.Expedientes;

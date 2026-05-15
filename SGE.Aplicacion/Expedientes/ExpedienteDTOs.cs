@@ -5,7 +5,7 @@ using SGE.Dominio.Expedientes;
 namespace SGE.Aplicacion.Expedientes;
 
 
-public record AgregarExpedienteRequest(Caratula Caratula, Guid UsuarioUltimoCambio);
+public record AgregarExpedienteRequest(String Caratula, Guid UsuarioUltimoCambio);
 public record AgregarExpedienteResponse(Guid id);
 
 public record EliminarExpedienteRequest(Guid Id, Guid UsuarioUltimoCambio);

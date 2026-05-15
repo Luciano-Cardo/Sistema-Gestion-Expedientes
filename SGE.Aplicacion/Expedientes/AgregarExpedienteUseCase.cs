@@ -1,4 +1,5 @@
-
+using SGE.Aplicacion.Autorizacion;
+using SGE.Dominio.Expedientes;
 
 namespace SGE.Aplicacion.Expedientes;
 
@@ -19,24 +20,22 @@ public class AgregarExpedienteUseCase
 
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
-        if (!_autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.ExpedienteAlta))
+        if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteAlta))
 
         {
             throw new AutorizacionException("El usuario no posee la autorización");
         }
         
-        var nuevoExpediente = new Expediente(request.Caratula,request.UsuarioUltimoCambio); 
-
         var caratula = new Caratula(request.Caratula);
+
+        var nuevoExpediente = new Expediente(caratula,request.UsuarioUltimoCambio); 
         
-        var expediente = new Expediente(caratula, request.IdUsuario);
+        var expediente = new Expediente(caratula, request.UsuarioUltimoCambio);
 
         _repo.Agregar(expediente);
 
         return new AgregarExpedienteResponse(expediente.Id);
 
     }
-
-
 
 }
