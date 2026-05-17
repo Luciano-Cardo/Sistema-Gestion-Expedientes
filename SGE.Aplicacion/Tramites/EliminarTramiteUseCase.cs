@@ -23,11 +23,11 @@ public class EliminarTramiteUseCase
     public EliminarTramiteResponse Ejecutar (EliminarTramiteRequest request)
     {
         if (!_autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteBaja)) 
-            throw new AutorizacionException("El usuario no posee autorizacion para eliminar tramites");
+            throw new EntidadNoEncontradaException("El usuario no posee autorizacion para eliminar tramites");
 
         var tramite = _repoTramite.ObtenerPorId(request.IdTramite);
         if (tramite == null) 
-            throw new AutorizacionException("No existe un tramite con ese ID");
+            throw new EntidadNoEncontradaException("No existe un tramite con ese ID");
         
         _repoTramite.Eliminar(tramite.Id);
         

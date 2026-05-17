@@ -46,7 +46,7 @@ public class ExpedienteTxtRepository : IExpedienteRepository
         }
 
         if(expedienteABorrar == null)
-            throw new Exception("No se encontro el expediente para eliminar");
+            throw new RepositorioException("No se encontro el expediente para eliminar");
 
         expedientes.Remove(expedienteABorrar);
         SobreEscribir(expedientes);   
@@ -61,16 +61,11 @@ public class ExpedienteTxtRepository : IExpedienteRepository
         foreach (Expediente e in expedientes)
         {
             if(e.Id == expediente.Id)
-            {
                 expedienteModificar = e;
-            }
-
         }
 
         if(expedienteModificar == null)
-        {
-            throw new Exception("No se encontro el expediente para modificar");
-        }
+            throw new RepositorioException("No se encontro el expediente para modificar");
 
         expediente.ModificarCaratula(expedienteModificar.Caratula,expedienteModificar.Id);
         SobreEscribir(expedientes);
@@ -83,25 +78,19 @@ public class ExpedienteTxtRepository : IExpedienteRepository
         foreach (Expediente e in expedientes)
         {
             if(e.Id == id)
-            {
                 obtenerExpediente = e;
-            }
         }
         if(obtenerExpediente == null)
-        {
-            throw new Exception("No se encontro un ID con ese expediente");
-        }
+            return null;
         return obtenerExpediente;
     }
 
-        public IEnumerable<Expediente> ObtenerTodos()
+    public IEnumerable<Expediente> ObtenerTodos()
     {
         List<Expediente> resultado = new List<Expediente>();
 
         if (!File.Exists(_expedienteTxt))
-        {
             return resultado;
-        }
 
         try 
         {

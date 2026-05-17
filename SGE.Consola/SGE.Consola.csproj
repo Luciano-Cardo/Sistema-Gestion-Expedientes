@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SGE.Dominio\SGE.Dominio.csproj" />
+    <ProjectReference Include="..\SGE.Aplicacion\SGE.Aplicacion.csproj" />
+    <ProjectReference Include="..\SGE.Infraestructura\SGE.Infraestructura.csproj" />
+  </ItemGroup>
+
 </Project>

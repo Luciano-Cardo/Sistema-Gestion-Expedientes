@@ -1,5 +1,4 @@
 using SGE.Aplicacion.Autorizacion;
-using SGE.Dominio.Expedientes;
 
 namespace SGE.Aplicacion.Expedientes;
 
@@ -27,6 +26,6 @@ public class CambiarEstadoExpedienteUseCase
 
         _repo.Modificar(expediente);
 
-        return new CambiarEstadoExpedienteResponse(expediente.Id,expediente.Estado,expediente.FechaUltimaModificacion);
+        return new CambiarEstadoExpedienteResponse(expediente.Id, expediente.Estado, expediente.FechaUltimaModificacion);
     }
 }
