@@ -2,7 +2,6 @@ using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Interfaces;
 using SGE.Aplicacion.Servicios;
-using SGE.Dominio.Tramites;
 
 namespace SGE.Aplicacion.Tramites;
 
@@ -10,29 +9,32 @@ public class ModificarTramiteUseCase
 {
     private readonly ITramiteRepository _repoTramite;
     private readonly IExpedienteRepository _repoExpediente;
-
     private readonly IAutorizacionService _autorizacion;
+    private readonly ActualizacionEstadoExpedienteService _servicioEstado;
 
-    public ModificarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion)
+    public ModificarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado)
     {
         _repoTramite = repoTramite;
         _repoExpediente = repoExpediente;
         _autorizacion = autorizacion;
+        _servicioEstado = servicioEstado;
     }
 
     public ModificarTramiteResponse Ejecutar (ModificarTramiteRequest request)
     {
-        if(!_autorizacion.PoseeElPermiso(request.id,Permiso.TramiteModificacion)) throw new AutorizacionException("No posee el permiso");
+        if(!_autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteModificacion)) 
+            throw new AutorizacionException("El usuario no posee autorizacion para modificar el tramite");
 
-        var tramite = _repoTramite.ObtenerPorId(request.id);
+        var tramite = _repoTramite.ObtenerPorId(request.IdTramite);
+        if(tramite == null) 
+            throw new AutorizacionException("No existe un tramite con ese ID");
 
-        if(tramite == null) throw new AutorizacionException("No existe un tramite con ese id");
-
-        tramite.ModificarContenido(request.NuevoContenidoTramite,request.id);
-        ActualizacionEstadoExpedienteService actualizar = new ActualizacionEstadoExpedienteService(_repoExpediente,_repoTramite);
-        actualizar.Ejecutar(tramite.ExpedienteId,tramite.Id);
+        tramite.ModificarContenido(request.NuevoContenido, request.IdUsuario);
+ 
         _repoTramite.Modificar(tramite);
+
+        _servicioEstado.Ejecutar(tramite.ExpedienteId, request.IdUsuario);
         
-        return new ModificarTramiteResponse(tramite.Id,tramite.UsuarioUltimoCambio,tramite.FechaUltimaModificacion);
+        return new ModificarTramiteResponse(tramite.Id, tramite.UsuarioUltimoCambio, tramite.FechaUltimaModificacion);
     }
 }

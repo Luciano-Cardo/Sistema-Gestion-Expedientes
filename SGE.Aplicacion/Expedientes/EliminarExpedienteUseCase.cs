@@ -5,9 +5,9 @@ namespace SGE.Aplicacion.Expedientes;
 
 public class EliminarExpedienteUseCase
 {
-    private IExpedienteRepository _expRepo;
-    private ITramiteRepository _tramiteRepo;
-    private IAutorizacionService _autorizacion;
+    private readonly IExpedienteRepository _expRepo;
+    private readonly ITramiteRepository _tramiteRepo;
+    private readonly IAutorizacionService _autorizacion;
 
     public EliminarExpedienteUseCase(IExpedienteRepository expRepo, ITramiteRepository tramiteRepo, IAutorizacionService autorizacion)
     {
@@ -18,21 +18,19 @@ public class EliminarExpedienteUseCase
 
     public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request)
     {
+        if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteBaja))
+            throw new AutorizacionException("El usuario no posee la autorizacion para eliminar expedientes");
 
-        if (!_autorizacion.PoseeElPermiso(request.Id, Permiso.ExpedienteBaja))
-        {
-            throw new AutorizacionException("El usuario no posee la autorizacion");
-        }
+        var expediente = _expRepo.ObtenerPorId(request.Id);
+        if (expediente == null)
+            throw new EntidadNoEncontradaException("No existe un expediente con ese ID");
 
         var tramites = _tramiteRepo.ObtenerPorExpedienteId(request.Id);
         foreach(var tramite in tramites)
-        {
             _tramiteRepo.Eliminar(tramite.Id);
-        }
 
         _expRepo.Eliminar(request.Id);
 
         return new EliminarExpedienteResponse(request.Id);
     }
-
 }

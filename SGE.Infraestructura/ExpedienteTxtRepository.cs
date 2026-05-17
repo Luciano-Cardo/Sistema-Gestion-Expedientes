@@ -1,8 +1,4 @@
-using System;
-using System.IO;
-using System.Security.AccessControl;
 using SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Interfaces;
 using SGE.Dominio.Expedientes;
 namespace SGE.Infraestructura;
 
@@ -27,21 +23,13 @@ public class ExpedienteTxtRepository : IExpedienteRepository
         escribir(expediente, true);
     }
 
-
-    public void SobreEscribir(List<Expediente> expedientes)
+    private void SobreEscribir(List<Expediente> expedientes)
     {
-        try
-        {            
-            foreach(Expediente exp in expedientes)
-            {
-                escribir (exp, false);   
-            }
-        }
-        catch(Exception e)
-        {
-            throw new Exception("Error a sobreescribir el archivo");
-        }
+        File.WriteAllText(_expedienteTxt, string.Empty);
+        foreach (var exp in expedientes)
+            escribir(exp, true);
     }
+
     public void Eliminar(Guid id)
     {
         List<Expediente> expedientes = (List<Expediente>)ObtenerTodos();
@@ -58,9 +46,7 @@ public class ExpedienteTxtRepository : IExpedienteRepository
         }
 
         if(expedienteABorrar == null)
-        {
             throw new Exception("No se encontro el expediente para eliminar");
-        }
 
         expedientes.Remove(expedienteABorrar);
         SobreEscribir(expedientes);   

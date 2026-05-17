@@ -8,7 +8,6 @@ public class CambiarEstadoExpedienteUseCase
     private readonly IExpedienteRepository _repo;
     private readonly IAutorizacionService _autorizacion;
 
-
     public  CambiarEstadoExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion)
     {
         _repo = repo;
@@ -18,17 +17,16 @@ public class CambiarEstadoExpedienteUseCase
     public CambiarEstadoExpedienteResponse Ejecutar(CambiarEstadoExpedienteRequest request)
     {
         if (!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.ExpedienteModificacion))
-        {
-            throw new AutorizacionException("El usuario no posee la autorizacion");
-        }
+            throw new AutorizacionException("El usuario no posee la autorizacion para cambiar el estado del expediente");
 
-        var expedienteModificado = _repo.ObtenerPorId(request.Id);
-        if(expedienteModificado == null) throw new Exception("No existe ese expediente");
+        var expediente = _repo.ObtenerPorId(request.Id);
+        if(expediente == null) 
+            throw new EntidadNoEncontradaException("No existe expediente con ese ID");
 
-        expedienteModificado.CambiarEstado(request.NuevoEstado,request.Id);
+        expediente.CambiarEstado(request.NuevoEstado,request.UsuarioUltimoCambio);
 
-        _repo.Modificar(expedienteModificado);
+        _repo.Modificar(expediente);
 
-        return new CambiarEstadoExpedienteResponse(expedienteModificado.Id,expedienteModificado.Estado,expedienteModificado.FechaUltimaModificacion);
+        return new CambiarEstadoExpedienteResponse(expediente.Id,expediente.Estado,expediente.FechaUltimaModificacion);
     }
 }

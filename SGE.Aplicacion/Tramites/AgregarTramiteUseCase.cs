@@ -8,30 +8,33 @@ namespace SGE.Aplicacion.Tramites;
 
 public class AgregarTramiteUseCase
 {
-    ITramiteRepository _repoTramite;
-    IExpedienteRepository _repoExpediente;
-    IAutorizacionService _autorizacion;
+    private readonly ITramiteRepository _repoTramite;
+    private readonly IExpedienteRepository _repoExpediente;
+    private readonly IAutorizacionService _autorizacion;
+    private readonly ActualizacionEstadoExpedienteService _servicioEstado;
 
-    public AgregarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion)
+    public AgregarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado)
     {
         _repoTramite = repoTramite;
         _repoExpediente = repoExpediente;
         _autorizacion = autorizacion;
+        _servicioEstado = servicioEstado;
     }
-
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
-        if(!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio,Permiso.TramiteAlta)) throw new AutorizacionException("No tiene permisos");
+        if(!_autorizacion.PoseeElPermiso(request.UsuarioUltimoCambio, Permiso.TramiteAlta)) 
+            throw new AutorizacionException("El usuario no posee autorizacion para agregar tramites");
 
-        var nuevoExpediente = _repoExpediente.ObtenerPorId(request.UsuarioUltimoCambio);
+        var expediente = _repoExpediente.ObtenerPorId(request.ExpedienteId);
+        if(expediente == null) 
+            throw new AutorizacionException("No existe un expediente con ese ID");
 
-        if(nuevoExpediente == null) throw new AutorizacionException("No existe un Tramite con ese ID");
-        Tramite nuevoTramite = new Tramite(request.ExpedienteId,request.Etiqueta,request.Contenido,request.UsuarioUltimoCambio);
+        Tramite nuevoTramite = new Tramite(request.ExpedienteId, request.Etiqueta, request.Contenido, request.UsuarioUltimoCambio);
 
-        ActualizacionEstadoExpedienteService s = new ActualizacionEstadoExpedienteService (_repoExpediente,_repoTramite);
-        s.Ejecutar(nuevoTramite.ExpedienteId,nuevoTramite.Id);
+        _repoTramite.Agregar(nuevoTramite);
 
-        return new AgregarTramiteResponse(nuevoTramite.UsuarioUltimoCambio,nuevoTramite.FechaCreacion);
+        _servicioEstado.Ejecutar(request.ExpedienteId, request.UsuarioUltimoCambio);
 
-    }
+        return new AgregarTramiteResponse(nuevoTramite.Id, nuevoTramite.FechaCreacion);
+    } 
 }

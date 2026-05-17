@@ -15,22 +15,22 @@ public class ActualizacionEstadoExpedienteService
         _repoTramite = repoTramite;
     }
 
-    public void Ejecutar (Guid expedienteId, Guid id)
+    public void Ejecutar (Guid ExpedienteId, Guid IdUsuario)
     {
-        var expediente = _repoExpediente.ObtenerPorId(expedienteId);
-        if(expediente == null) throw new Exception("Expediente no encontrado");
+        var expediente = _repoExpediente.ObtenerPorId(ExpedienteId);
+        if(expediente == null) 
+            throw new EntidadNoEncontradaException("No existe un expediente con ese ID");
 
-        var lista = _repoTramite.ObtenerPorExpedienteId(expedienteId);
         Tramite? ultimo = null;
-        foreach(var t in lista)
+        foreach (var t in _repoTramite.ObtenerPorExpedienteId(ExpedienteId))
         {
-            if(ultimo == null || t.FechaCreacion > ultimo.FechaCreacion) ultimo = t;
+            if (ultimo == null || t.FechaCreacion > ultimo.FechaCreacion)
+                ultimo = t;
         }
-
-        if(ultimo != null)
-        {
-            expediente.ActualizarEstado(ultimo.Etiqueta,id);
-        }
-
+        EtiquetaTramite? ultimaEtiqueta = ultimo?.Etiqueta;
+ 
+        bool cambio = expediente.ActualizarEstado(ultimaEtiqueta, IdUsuario);
+        if (cambio)
+            _repoExpediente.Modificar(expediente);
     }
 }
