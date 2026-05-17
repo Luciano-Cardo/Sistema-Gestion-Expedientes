@@ -1,8 +1,7 @@
 using SGE.Aplicacion.Autorizacion;
 namespace SGE.Infraestructura;
 
-public interface AutorizacionProvisionalService : IAutorizacionService
+public class AutorizacionProvisionalService : IAutorizacionService
 {
-    bool PoseeElPermiso(Guid idUsuario, Permiso Permiso) => true;
-
+    public bool PoseeElPermiso(Guid idUsuario, Permiso Permiso) => true;
 }

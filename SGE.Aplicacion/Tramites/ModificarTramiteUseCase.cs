@@ -23,7 +23,7 @@ public class ModificarTramiteUseCase
     public ModificarTramiteResponse Ejecutar (ModificarTramiteRequest request)
     {
         if(!_autorizacion.PoseeElPermiso(request.IdUsuario, Permiso.TramiteModificacion)) 
-            throw new EntidadNoEncontradaException("El usuario no posee autorizacion para modificar el tramite");
+            throw new AutorizacionException("El usuario no posee autorizacion para modificar el tramite");
 
         var tramite = _repoTramite.ObtenerPorId(request.IdTramite);
         if(tramite == null) 
