@@ -16,3 +16,6 @@ public record CambiarEstadoExpedienteResponse(Guid Id, EstadoExpediente Estado, 
 
 public record ListarExpedientesRequest();
 public record ExpedienteResumenResponse(Guid Id, Caratula Caratula, EstadoExpediente Estado, DateTime FechaCreacion, DateTime FechaUltimaModificacion,Guid UsuarioUltimoCambio);
+public record ObtenerExpedienteConDetalleRequest(Guid Id);
+public record TramiteDtos(Guid Id, String Etiqueta, String Contenido, DateTime FechaCreacion);
+public record ObtenerExpedienteConDetalleResponse(Guid Id, String Caratula, String Estado, Guid UsuarioUltimoCambio, List<TramiteDtos> Tramites);

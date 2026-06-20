@@ -6,11 +6,12 @@ public class CambiarEstadoExpedienteUseCase
 {
     private readonly IExpedienteRepository _repo;
     private readonly IAutorizacionService _autorizacion;
-
-    public  CambiarEstadoExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public  CambiarEstadoExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion, IUnidadDeTrabajo unidadDeTrabajo)
     {
         _repo = repo;
         _autorizacion = autorizacion;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
 
     public CambiarEstadoExpedienteResponse Ejecutar(CambiarEstadoExpedienteRequest request)
@@ -25,6 +26,7 @@ public class CambiarEstadoExpedienteUseCase
         expediente.CambiarEstado(request.NuevoEstado,request.UsuarioUltimoCambio);
 
         _repo.Modificar(expediente);
+        _unidadDeTrabajo.Guardar();
 
         return new CambiarEstadoExpedienteResponse(expediente.Id, expediente.Estado, expediente.FechaUltimaModificacion);
     }

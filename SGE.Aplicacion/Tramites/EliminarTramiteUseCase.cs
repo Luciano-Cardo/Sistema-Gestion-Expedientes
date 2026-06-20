@@ -11,13 +11,14 @@ public class EliminarTramiteUseCase
     private readonly IExpedienteRepository _repoExpediente;
     private readonly IAutorizacionService _autorizacion;
     private readonly ActualizacionEstadoExpedienteService _servicioEstado;
-
-    public EliminarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public EliminarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado, IUnidadDeTrabajo unidadDeTrabajo)
     {
         _repoTramite = repoTramite;
         _repoExpediente = repoExpediente;
         _autorizacion = autorizacion;
         _servicioEstado = servicioEstado;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
 
     public EliminarTramiteResponse Ejecutar (EliminarTramiteRequest request)
@@ -32,7 +33,7 @@ public class EliminarTramiteUseCase
         _repoTramite.Eliminar(tramite.Id);
         
         _servicioEstado.Ejecutar(tramite.ExpedienteId, request.IdUsuario);
-
+        _unidadDeTrabajo.Guardar();
         return new EliminarTramiteResponse(tramite.Id);
     }
 }
