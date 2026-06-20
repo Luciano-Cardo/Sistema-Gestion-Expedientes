@@ -8,12 +8,13 @@ public class EliminarExpedienteUseCase
     private readonly IExpedienteRepository _expRepo;
     private readonly ITramiteRepository _tramiteRepo;
     private readonly IAutorizacionService _autorizacion;
-
-    public EliminarExpedienteUseCase(IExpedienteRepository expRepo, ITramiteRepository tramiteRepo, IAutorizacionService autorizacion)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public EliminarExpedienteUseCase(IExpedienteRepository expRepo, ITramiteRepository tramiteRepo, IAutorizacionService autorizacion,IUnidadDeTrabajo unidadDeTrabajo)
     {
         _expRepo = expRepo;
         _tramiteRepo = tramiteRepo;
         _autorizacion = autorizacion;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
 
     public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request)
@@ -30,7 +31,7 @@ public class EliminarExpedienteUseCase
             _tramiteRepo.Eliminar(tramite.Id);
 
         _expRepo.Eliminar(request.Id);
-
+        _unidadDeTrabajo.Guardar();
         return new EliminarExpedienteResponse(request.Id);
     }
 }

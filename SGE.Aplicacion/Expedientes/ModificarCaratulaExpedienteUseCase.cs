@@ -7,11 +7,12 @@ public class ModificarCaratulaExpedienteUseCase
 {
     private readonly IAutorizacionService _autorizacion;
     private readonly IExpedienteRepository _expRepo;
-
-    public ModificarCaratulaExpedienteUseCase(IExpedienteRepository expRepo, IAutorizacionService autorizacion)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public ModificarCaratulaExpedienteUseCase(IExpedienteRepository expRepo, IAutorizacionService autorizacion, IUnidadDeTrabajo unidadDeTrabajo)
     {
         _expRepo = expRepo;
         _autorizacion = autorizacion;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
 
     public ModificarCaratulaExpedienteResponse Ejecutar(ModificarCaratulaExpedienteRequest request)
@@ -29,7 +30,7 @@ public class ModificarCaratulaExpedienteUseCase
         expediente.ModificarCaratula(nuevaCaratula, request.UsuarioUltimoCambio);
 
         _expRepo.Modificar(expediente);
-
+        _unidadDeTrabajo.Guardar();
         return new ModificarCaratulaExpedienteResponse(expediente.Id, expediente.Caratula, expediente.FechaUltimaModificacion);
     }
 }

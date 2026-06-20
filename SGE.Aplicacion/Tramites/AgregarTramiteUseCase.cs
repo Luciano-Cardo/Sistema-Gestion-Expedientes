@@ -12,13 +12,14 @@ public class AgregarTramiteUseCase
     private readonly IExpedienteRepository _repoExpediente;
     private readonly IAutorizacionService _autorizacion;
     private readonly ActualizacionEstadoExpedienteService _servicioEstado;
-
-    public AgregarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public AgregarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado, IUnidadDeTrabajo unidadDeTrabajo)
     {
         _repoTramite = repoTramite;
         _repoExpediente = repoExpediente;
         _autorizacion = autorizacion;
         _servicioEstado = servicioEstado;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
@@ -34,7 +35,7 @@ public class AgregarTramiteUseCase
         _repoTramite.Agregar(nuevoTramite);
 
         _servicioEstado.Ejecutar(request.ExpedienteId, request.UsuarioUltimoCambio);
-
+        _unidadDeTrabajo.Guardar();
         return new AgregarTramiteResponse(nuevoTramite.Id, nuevoTramite.FechaCreacion);
     } 
 }

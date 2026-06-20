@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucia\\OneDrive\\Desktop\\SGE\\SGE.Dominio\\SGE.Dominio.csproj": {}
+    "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucia\\OneDrive\\Desktop\\SGE\\SGE.Dominio\\SGE.Dominio.csproj": {
+    "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\SGE\\SGE.Dominio\\SGE.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj",
         "projectName": "SGE.Dominio",
-        "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\SGE\\SGE.Dominio\\SGE.Dominio.csproj",
-        "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\SGE\\SGE.Dominio\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

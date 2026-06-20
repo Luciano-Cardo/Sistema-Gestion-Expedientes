@@ -1,16 +1,17 @@
 using SGE.Aplicacion.Autorizacion;
 using SGE.Dominio.Expedientes;
-
 namespace SGE.Aplicacion.Expedientes;
 
 public class AgregarExpedienteUseCase
 {
     private readonly IExpedienteRepository _repo;
     private readonly IAutorizacionService _autorizacion;
-    public AgregarExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public AgregarExpedienteUseCase(IExpedienteRepository repo, IAutorizacionService autorizacion,IUnidadDeTrabajo unidadDeTrabajo)
     {
         _repo = repo;
         _autorizacion = autorizacion;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
@@ -22,6 +23,7 @@ public class AgregarExpedienteUseCase
         var nuevoExpediente = new Expediente(caratula,request.UsuarioUltimoCambio); 
 
         _repo.Agregar(nuevoExpediente);
+        _unidadDeTrabajo.Guardar();
 
         return new AgregarExpedienteResponse(nuevoExpediente.Id);
     }

@@ -11,13 +11,14 @@ public class ModificarTramiteUseCase
     private readonly IExpedienteRepository _repoExpediente;
     private readonly IAutorizacionService _autorizacion;
     private readonly ActualizacionEstadoExpedienteService _servicioEstado;
-
-    public ModificarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado)
+    private readonly IUnidadDeTrabajo _unidadDeTrabajo;
+    public ModificarTramiteUseCase(ITramiteRepository repoTramite, IExpedienteRepository repoExpediente, IAutorizacionService autorizacion, ActualizacionEstadoExpedienteService servicioEstado, IUnidadDeTrabajo unidadDeTrabajo)
     {
         _repoTramite = repoTramite;
         _repoExpediente = repoExpediente;
         _autorizacion = autorizacion;
         _servicioEstado = servicioEstado;
+        _unidadDeTrabajo = unidadDeTrabajo;
     }
 
     public ModificarTramiteResponse Ejecutar (ModificarTramiteRequest request)
@@ -34,7 +35,7 @@ public class ModificarTramiteUseCase
         _repoTramite.Modificar(tramite);
 
         _servicioEstado.Ejecutar(tramite.ExpedienteId, request.IdUsuario);
-        
+        _unidadDeTrabajo.Guardar();
         return new ModificarTramiteResponse(tramite.Id, tramite.UsuarioUltimoCambio, tramite.FechaUltimaModificacion);
     }
 }
