@@ -1,4 +1,5 @@
 using SGE.Aplicacion.Autorizacion;
+using SGE.Aplicacion.Comun;
 
 namespace SGE.Aplicacion.Expedientes;
 
@@ -26,7 +27,7 @@ public class CambiarEstadoExpedienteUseCase
         expediente.CambiarEstado(request.NuevoEstado,request.UsuarioUltimoCambio);
 
         _repo.Modificar(expediente);
-        _unidadDeTrabajo.Guardar();
+        _unidadDeTrabajo.GuardarCambios();
 
         return new CambiarEstadoExpedienteResponse(expediente.Id, expediente.Estado, expediente.FechaUltimaModificacion);
     }
