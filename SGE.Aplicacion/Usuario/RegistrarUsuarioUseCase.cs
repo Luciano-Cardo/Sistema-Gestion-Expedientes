@@ -2,7 +2,8 @@ using System.Security.Cryptography.X509Certificates;
 using SGE.Aplicacion.Autorizacion;
 using SGE.Dominio.Comun;
 using SGE.Dominio.Entidades;
-using SGE.Dominio.Entidades.Cifrado;
+using SGE.Aplicacion.Usuarios;
+using SGE.Aplicacion.Interfaces;
 public class RegristrarUsuarioUseCase
 {
     private readonly IUsuarioRepository _repoUsuario;
@@ -23,7 +24,7 @@ public class RegristrarUsuarioUseCase
         String contrasenaHasheada = sh.calcularHash(request.contrasena);
         Usuario usuario = new Usuario(request.Nombre,request.CorreoElectronico,contrasenaHasheada);
         _repoUsuario.Agregar(usuario);
-        _unidadDeTrabajo.Guardar();
+        _unidadDeTrabajo.GuardarCambios();
         return new RegistrarUsuarioResponse(usuario.Id);
     }
 }

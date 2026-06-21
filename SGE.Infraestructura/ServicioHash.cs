@@ -1,10 +1,11 @@
-namespace SGE.Dominio.Entidades.Cifrado;
+namespace SGE.Infraestructura;
 
+using SGE.Aplicacion.Servicios;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 
-public record class ServicioHash
+public record class ServicioHash : IHashService
 {
     public String calcularHash(String contrasenaPlana)
     {
