@@ -1,4 +1,5 @@
-using SGE.Aplicacion.Autorizacion;
+using SGE.Aplicacion.Comun;
+using SGE.Dominio.Autorizacion;
 using SGE.Dominio.Expedientes;
 namespace SGE.Aplicacion.Expedientes;
 

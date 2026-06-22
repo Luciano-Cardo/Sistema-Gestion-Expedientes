@@ -1,4 +1,3 @@
-using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Interfaces;
 using SGE.Aplicacion.Comun;
 
@@ -17,19 +16,19 @@ public class EliminarUsuarioUseCase
 
     public void Ejecutar(EliminarUsuarioRequest request)
     {
-        var usuarioOrigen = _usuarioRepo.obtenerPorId(request.IdOrigen);
-        if(usuarioOrigen == null || !usuarioOrigen.esAdministrador)
+        var usuarioOrigen = _usuarioRepo.ObtenerPorId(request.IdOrigen);
+        if(usuarioOrigen == null || !usuarioOrigen.EsAdministrador)
         {
             throw new AutorizacionException("acceso denegado: el usuario no es administrador o no existe");   
         }
 
-        var eliminar = _usuarioRepo.obtenerPorId(request.IdAEliminar);
+        var eliminar = _usuarioRepo.ObtenerPorId(request.IdAEliminar);
         if(eliminar == null)
         {
             throw new EntidadNoEncontradaException("el usuario a eliminar no existe");   
         }
 
         _usuarioRepo.Eliminar(eliminar);
-        _unidadDeTrabajo.GuardarCambios();
+        _unidadDeTrabajo.Guardar();
     }
 }

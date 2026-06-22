@@ -319,19 +319,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\astor\\.nuget\\packages\\": {}
+    "C:\\Users\\lucia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\astor\\Sistema-Gestion-Expedientes\\SGE.csproj",
+      "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-main\\SGE.csproj",
       "projectName": "SGE",
-      "projectPath": "C:\\Users\\astor\\Sistema-Gestion-Expedientes\\SGE.csproj",
-      "packagesPath": "C:\\Users\\astor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\astor\\Sistema-Gestion-Expedientes\\obj\\",
+      "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-main\\SGE.csproj",
+      "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-main\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\astor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -355,7 +355,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net10.0": {
@@ -382,7 +382,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -665,7 +665,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+      "message": "Problem reading the cache file C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-main\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
     }
   ]
 }

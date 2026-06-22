@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE", "SGE.csproj", "{79F7EC8F-6A21-1CC7-AC37-231F9EA376F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Aplicacion", "SGE.Aplicacion\SGE.Aplicacion.csproj", "{B76CEA2A-1542-863A-B058-8D9B57309143}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Dominio", "SGE.Dominio\SGE.Dominio.csproj", "{1F5244FB-4D59-73CD-0B63-2754C1ABD57B}"
@@ -16,10 +14,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{79F7EC8F-6A21-1CC7-AC37-231F9EA376F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79F7EC8F-6A21-1CC7-AC37-231F9EA376F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79F7EC8F-6A21-1CC7-AC37-231F9EA376F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79F7EC8F-6A21-1CC7-AC37-231F9EA376F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B76CEA2A-1542-863A-B058-8D9B57309143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B76CEA2A-1542-863A-B058-8D9B57309143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B76CEA2A-1542-863A-B058-8D9B57309143}.Release|Any CPU.ActiveCfg = Release|Any CPU

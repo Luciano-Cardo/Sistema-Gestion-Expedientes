@@ -1,4 +1,3 @@
-using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Interfaces;
 
@@ -17,26 +16,26 @@ public class ModificarPermisosUsuarioUseCase
 
     public void Ejecutar(ModificarPermisosUsuarioRequest request)
     {
-        var usuarioOrigen = _usuarioRepo.obtenerPorId(request.IdOrigen);
-        if(usuarioOrigen == null || !usuarioOrigen.esAdministrador)
+        var usuarioOrigen = _usuarioRepo.ObtenerPorId(request.IdOrigen);
+        if(usuarioOrigen == null || !usuarioOrigen.EsAdministrador)
         {
             throw new AutorizacionException("acceso denegado: el usuario no es administrador o no existe");   
         }
 
-        var usuarioAEditar = _usuarioRepo.obtenerPorId(request.IdAEditar);
+        var usuarioAEditar = _usuarioRepo.ObtenerPorId(request.IdAEditar);
         if(usuarioAEditar == null)        {
             throw new EntidadNoEncontradaException("el usuario a editar no existe");
         }
 
-        if (request.asignar)
+        if (request.Asignar)
         {
-            usuarioAEditar.AsignarPermiso(request.nuevoPermiso);
+            usuarioAEditar.AsignarPermiso(request.NuevoPermiso);
         }
         else
         {
-            usuarioAEditar.RemoverPermiso(request.nuevoPermiso);
+            usuarioAEditar.RemoverPermiso(request.NuevoPermiso);
         }
 
-        _unidadDeTrabajo.GuardarCambios();
+        _unidadDeTrabajo.Guardar();
     }
 }

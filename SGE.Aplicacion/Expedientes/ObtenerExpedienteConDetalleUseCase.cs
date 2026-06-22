@@ -1,7 +1,6 @@
 namespace SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Tramites;
+using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Interfaces;
-using SGE.Dominio.Tramites;
 using System.Linq;
 public class ObtenerExpedienteConDetalleUseCase
 {

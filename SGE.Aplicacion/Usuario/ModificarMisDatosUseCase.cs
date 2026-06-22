@@ -1,4 +1,3 @@
-using SGE.Aplicacion.Autorizacion;
 using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Servicios;
 using SGE.Dominio.Comun;
@@ -26,20 +25,20 @@ public class ModificarMisDatosUseCase
             throw new DominioException("No puede modificar los datos de otro usuario.");
         }
 
-        var usuario = _usuarioRepo.obtenerPorId(request.Id);
+        var usuario = _usuarioRepo.ObtenerPorId(request.Id);
         if(usuario == null)
         {
             throw new EntidadNoEncontradaException("El usuario no existe.");
         }
 
         string? nuevaContrasenaHash = null;
-        if(!string.IsNullOrWhiteSpace(request.contrasena))
+        if(!string.IsNullOrWhiteSpace(request.Contrasena))
         {
-            nuevaContrasenaHash = _hashService.calcularHash(request.contrasena);
+            nuevaContrasenaHash = _hashService.CalcularHash(request.Contrasena);
         }
 
         usuario.ModificarDatos(request.Nombre, nuevaContrasenaHash);
 
-        _unidadDeTrabajo.GuardarCambios();
+        _unidadDeTrabajo.Guardar();
     }
 }

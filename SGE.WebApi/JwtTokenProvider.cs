@@ -1,31 +1,46 @@
-<<<<<<< HEAD
-using SGE.Aplicacion.Servicios;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;   
 using System.Security.Claims;
 using System.Text;
-using SGE.Dominio.Entidades;
 using Microsoft.Extensions.Configuration;
-using System.Data;
+using Microsoft.IdentityModel.Tokens;
+using SGE.Aplicacion.Interfaces;
+using SGE.Dominio.Entidades;
 
-public class JwtTokenProvider(IConfiguration config) : ITokenService
+namespace SGE.WebApi.Servicios
 {
-    public string GenerarToken(Guid usuarioId)
+    public class JwtTokenProvider : ITokenService
     {
-        var claims = new [] {new Claim("ID", usuarioId.ToString())};
-        
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jtw:Key"]!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken(
-            issuer : config ["Jwt:Issuer"],
-            audience : config["Jwt:Audience"],
-            claims : claims,
-            expires : DateTime.UtcNow.AddHours(2),
-            signingCredentials : creds
-        );
-        return new JwtSecurityTokenHandler().WriteToken(token); 
-    } 
+        private readonly IConfiguration _config;
+
+        public JwtTokenProvider(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public string GenerarToken(Usuario usuario)
+        {
+            var keyString = _config["Jwt:Key"]; 
+            if (string.IsNullOrEmpty(keyString))
+            {
+                throw new InvalidOperationException("La clave secreta JWT no está configurada.");
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
+                new Claim("esAdministrador", usuario.esAdministrador.ToString())
+            };
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddHours(2),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+    }
 }
-=======
-//cosas de Jwt.
->>>>>>> 8011cb158bd6994018b455084fbc0d202c758687

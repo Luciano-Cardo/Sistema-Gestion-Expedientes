@@ -1,8 +1,6 @@
 using SGE.Dominio.Entidades;
 using SGE.Dominio.Autorizacion;
 using SGE.Infraestructura.SQLite;
-using System.Linq;
-using System.Xml.Schema;
 
 namespace SGE.Infraestructura;
 

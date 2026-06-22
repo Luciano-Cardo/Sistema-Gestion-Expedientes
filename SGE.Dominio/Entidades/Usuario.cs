@@ -1,9 +1,6 @@
-using System.Security.Cryptography;
-using System.Text;
+using SGE.Dominio.Autorizacion;
 using SGE.Dominio.Comun;
-using SGE.Dominio.Entidades;
 
-using SGE.Aplicacion.Autorizacion;
 namespace SGE.Dominio.Entidades;
 
 public  class Usuario{
@@ -11,8 +8,8 @@ public  class Usuario{
     public String Nombre { get; private set; }
     public String CorreoElectronico { get; private set; }
     public String ContrasenaHash { get; private set; }
-    public Boolean esAdministrador { get; private set; }
-    public List<Permiso> listaPermisos { get; private set; } //SEGUN EDU ARRANCA VACIA
+    public Boolean EsAdministrador { get; private set; }
+    public List<Permiso> ListaPermisos { get; private set; } //SEGUN EDU ARRANCA VACIA
     
     protected Usuario(){ }
     public Usuario(String Nombre, String CorreoElectronico, String ConstrasenaHash)
@@ -25,13 +22,9 @@ public  class Usuario{
         this.Nombre = Nombre;
         this.CorreoElectronico = CorreoElectronico;
         this.ContrasenaHash = ContrasenaHash;
-        this.esAdministrador = false;
-        this.listaPermisos = new List<Permiso>();
+        this.EsAdministrador = false;
+        this.ListaPermisos = new List<Permiso>();
     }
-
-
-
-
 
     public void ModificarDatos(string nombre, string? contrasenaHash)
     {
@@ -39,7 +32,7 @@ public  class Usuario{
         {
             throw new InvalidDataException("El nombre no puede estar vacío.");
 
-            throw new AutorizacionException("El nombre no puede estar vacío.");
+            throw new DominioException("El nombre no puede estar vacío.");
         }
 
         this.Nombre = nombre;
@@ -52,23 +45,23 @@ public  class Usuario{
 
     public void AsignarPermiso(Permiso permiso)
     {
-        if (!listaPermisos.Contains(permiso))
+        if (!ListaPermisos.Contains(permiso))
         {
-            listaPermisos.Add(permiso);
+            ListaPermisos.Add(permiso);
         }
     }
 
     public void RemoverPermiso(Permiso permiso)
     {
-        if (listaPermisos.Contains(permiso))
+        if (ListaPermisos.Contains(permiso))
         {
-            listaPermisos.Remove(permiso);
+            ListaPermisos.Remove(permiso);
         }
     }
 
     public void convertirEnAdministrador()
     {
-        this.esAdministrador = true;
+        this.EsAdministrador = true;
     }
 
 }

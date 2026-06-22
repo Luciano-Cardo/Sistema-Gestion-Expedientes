@@ -1,4 +1,4 @@
 public interface IUnidadDeTrabajo
 {
-    void GuardarCambios();
+    void Guardar();
 }

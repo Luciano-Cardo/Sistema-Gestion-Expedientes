@@ -1,4 +1,4 @@
-using SGE.Aplicacion.Autorizacion;
+using SGE.Dominio.Autorizacion;
 namespace SGE.Infraestructura;
 
 public class AutorizacionProvisionalService : IAutorizacionService
