@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using SGE.Dominio.Entidades;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;

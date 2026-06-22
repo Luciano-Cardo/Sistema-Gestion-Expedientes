@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using SGE.Aplicacion.Servicios;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;   
@@ -25,3 +26,6 @@ public class JwtTokenProvider(IConfiguration config) : ITokenService
         return new JwtSecurityTokenHandler().WriteToken(token); 
     } 
 }
+=======
+//cosas de Jwt.
+>>>>>>> 8011cb158bd6994018b455084fbc0d202c758687

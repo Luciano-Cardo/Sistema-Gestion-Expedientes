@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "YfRh4VZz+AM=",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\Facultad PC\\2do año\\.NET\\Sistema-Gestion-Expedientes\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
@@ -49,4 +50,11 @@
       ]
     }
   ]
+=======
+  "dgSpecHash": "R2m/cxC5Qlo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\astor\\Sistema-Gestion-Expedientes\\SGE.Infraestructura\\SGE.Infraestructura.csproj",
+  "expectedPackageFiles": [],
+  "logs": []
+>>>>>>> 8011cb158bd6994018b455084fbc0d202c758687
 }

@@ -1,25 +1,20 @@
-using SGE.Aplicacion.Autorizacion;
-namespace SGE.Dominio.Entidades;
 using System.Security.Cryptography;
 using System.Text;
 using SGE.Dominio.Comun;
 using SGE.Dominio.Entidades;
+
+using SGE.Aplicacion.Autorizacion;
+namespace SGE.Dominio.Entidades;
 
 public  class Usuario{
     public Guid Id { get; private set; }
     public String Nombre { get; private set; }
     public String CorreoElectronico { get; private set; }
     public String ContrasenaHash { get; private set; }
-
     public Boolean esAdministrador { get; private set; }
     public List<Permiso> listaPermisos { get; private set; } //SEGUN EDU ARRANCA VACIA
-   
-   
-   
-   
-   
-   
-   
+    
+    protected Usuario(){ }
     public Usuario(String Nombre, String CorreoElectronico, String ConstrasenaHash)
     {
          if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(CorreoElectronico) || string.IsNullOrWhiteSpace(ContrasenaHash))
@@ -37,11 +32,14 @@ public  class Usuario{
 
 
 
+
     public void ModificarDatos(string nombre, string? contrasenaHash)
     {
         if (string.IsNullOrWhiteSpace(nombre))
         {
             throw new InvalidDataException("El nombre no puede estar vacío.");
+
+            throw new AutorizacionException("El nombre no puede estar vacío.");
         }
 
         this.Nombre = nombre;
@@ -72,4 +70,5 @@ public  class Usuario{
     {
         this.esAdministrador = true;
     }
+
 }
