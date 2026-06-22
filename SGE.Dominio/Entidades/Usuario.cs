@@ -2,7 +2,15 @@ using SGE.Aplicacion.Autorizacion;
 namespace SGE.Dominio.Entidades;
 using System.Security.Cryptography;
 using System.Text;
+<<<<<<< Updated upstream
 using SGE.Dominio.Entidades.Cifrado;
+=======
+using SGE.Dominio.Comun;
+using SGE.Dominio.Entidades;
+using SGE.Dominio.Autorizacion;
+
+namespace SGE.Dominio.Entidades;
+>>>>>>> Stashed changes
 
 public  class Usuario{
     public Guid Id { get; private set; }
@@ -23,7 +31,7 @@ public  class Usuario{
     {
          if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(CorreoElectronico) || string.IsNullOrWhiteSpace(ContrasenaHash))
             {
-                throw new AutorizacionException("Todos los datos del usuario son obligatorios.");
+                throw new DominioException("Todos los datos del usuario son obligatorios.");
             }        
         this.Id = Guid.NewGuid();
         this.Nombre = Nombre;
@@ -33,4 +41,43 @@ public  class Usuario{
         this.listaPermisos = new List<Permiso>();
     }
 
+<<<<<<< Updated upstream
+=======
+
+    public void ModificarDatos(string nombre, string? contrasenaHash)
+    {
+        if (string.IsNullOrWhiteSpace(nombre))
+        {
+            throw new InvalidDataException("El nombre no puede estar vacío.");
+        }
+
+        this.Nombre = nombre;
+
+        if (!string.IsNullOrWhiteSpace(contrasenaHash))
+        {
+            this.ContrasenaHash = contrasenaHash;
+        }
+    }
+
+    public void AsignarPermiso(Permiso permiso)
+    {
+        if (!listaPermisos.Contains(permiso))
+        {
+            listaPermisos.Add(permiso);
+        }
+    }
+
+    public void RemoverPermiso(Permiso permiso)
+    {
+        if (listaPermisos.Contains(permiso))
+        {
+            listaPermisos.Remove(permiso);
+        }
+    }
+
+    public void convertirEnAdministrador()
+    {
+        this.esAdministrador = true;
+    }
+>>>>>>> Stashed changes
 }
