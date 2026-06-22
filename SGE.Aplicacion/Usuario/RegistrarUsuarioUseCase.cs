@@ -2,7 +2,7 @@ using System.Security.Cryptography.X509Certificates;
 using SGE.Aplicacion.Autorizacion;
 using SGE.Dominio.Comun;
 using SGE.Dominio.Entidades;
-using SGE.Dominio.Entidades.Cifrado;
+using SGE.Dominio.Entidades;
 public class RegristrarUsuarioUseCase
 {
     private readonly IUsuarioRepository _repoUsuario;

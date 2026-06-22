@@ -2,15 +2,8 @@ using SGE.Aplicacion.Autorizacion;
 namespace SGE.Dominio.Entidades;
 using System.Security.Cryptography;
 using System.Text;
-<<<<<<< Updated upstream
-using SGE.Dominio.Entidades.Cifrado;
-=======
 using SGE.Dominio.Comun;
 using SGE.Dominio.Entidades;
-using SGE.Dominio.Autorizacion;
-
-namespace SGE.Dominio.Entidades;
->>>>>>> Stashed changes
 
 public  class Usuario{
     public Guid Id { get; private set; }
@@ -41,8 +34,8 @@ public  class Usuario{
         this.listaPermisos = new List<Permiso>();
     }
 
-<<<<<<< Updated upstream
-=======
+
+
 
     public void ModificarDatos(string nombre, string? contrasenaHash)
     {
@@ -79,5 +72,4 @@ public  class Usuario{
     {
         this.esAdministrador = true;
     }
->>>>>>> Stashed changes
 }
