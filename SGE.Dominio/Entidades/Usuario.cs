@@ -1,8 +1,9 @@
 using System.Security.Cryptography;
 using System.Text;
+using SGE.Dominio.Comun;
 using SGE.Dominio.Entidades;
-using SGE.Aplicacion.Autorizacion;
 
+using SGE.Aplicacion.Autorizacion;
 namespace SGE.Dominio.Entidades;
 
 public  class Usuario{
@@ -18,7 +19,7 @@ public  class Usuario{
     {
          if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(CorreoElectronico) || string.IsNullOrWhiteSpace(ContrasenaHash))
             {
-                throw new AutorizacionException("Todos los datos del usuario son obligatorios.");
+                throw new DominioException("Todos los datos del usuario son obligatorios.");
             }        
         this.Id = Guid.NewGuid();
         this.Nombre = Nombre;
@@ -29,10 +30,15 @@ public  class Usuario{
     }
 
 
+
+
+
     public void ModificarDatos(string nombre, string? contrasenaHash)
     {
         if (string.IsNullOrWhiteSpace(nombre))
         {
+            throw new InvalidDataException("El nombre no puede estar vacío.");
+
             throw new AutorizacionException("El nombre no puede estar vacío.");
         }
 
@@ -59,4 +65,10 @@ public  class Usuario{
             listaPermisos.Remove(permiso);
         }
     }
+
+    public void convertirEnAdministrador()
+    {
+        this.esAdministrador = true;
+    }
+
 }
