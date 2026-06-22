@@ -37,6 +37,8 @@ builder.Services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();
 builder.Services.AddScoped<IHashService, ServicioHash>();
 builder.Services.AddScoped<ITokenService, ServicioToken>();
 
+builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
+
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddScoped<RegistrarUsuarioUseCase>();
@@ -51,16 +53,19 @@ builder.Services.AddScoped<ModificarTramiteUseCase>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<SGEContext>();
-    context.Database.EnsureCreated(); 
+    InicializadorBD.Inicializar(context);
     context.Database.ExecuteSqlRaw("PRAGMA journal_mode=DELETE;"); 
 }
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();

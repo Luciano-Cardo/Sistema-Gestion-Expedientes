@@ -16,3 +16,6 @@ C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Infraestructura\obj\Debug\net10.0\SGE.In
 C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Infraestructura\obj\Debug\net10.0\refint\SGE.Infraestructura.dll
 C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Infraestructura\obj\Debug\net10.0\SGE.Infraestructura.pdb
 C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Infraestructura\obj\Debug\net10.0\ref\SGE.Infraestructura.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Infraestructura\obj\Debug\net10.0\SGE.Infraestructura.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Infraestructura\obj\Debug\net10.0\refint\SGE.Infraestructura.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Infraestructura\obj\Debug\net10.0\SGE.Infraestructura.pdb

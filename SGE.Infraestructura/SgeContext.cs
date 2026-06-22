@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SGE.Dominio.Entidades;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
@@ -18,5 +19,4 @@ public class SgeContext : DbContext
 
         modelBuilder.Entity<Tramite>().ComplexProperty(t => t.Contenido);
     }
-
 }
