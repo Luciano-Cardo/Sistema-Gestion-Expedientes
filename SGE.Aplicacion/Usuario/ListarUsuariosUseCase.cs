@@ -21,6 +21,11 @@ public class ListarUsuariosUseCase
         }
 
         List<Usuario> usuarios = _usuarioRepo.ObtenerTodos();
-        return new ListarUsuariosResponse(usuarios);
+    
+        var usuariosDto = usuarios.Select(u => 
+            new UsuarioDTO(u.Id, u.Nombre, u.CorreoElectronico, u.EsAdministrador, u.Permisos)
+        ).ToList();
+
+        return new ListarUsuariosResponse(usuariosDto);
     }
 }

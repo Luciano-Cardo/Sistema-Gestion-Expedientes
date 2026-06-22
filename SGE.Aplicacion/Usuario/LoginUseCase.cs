@@ -1,6 +1,7 @@
 using SGE.Aplicacion.Servicios;
 using SGE.Dominio.Comun;
 using SGE.Aplicacion.Interfaces;
+using SGE.Aplicacion.Comun;
 
 namespace SGE.Aplicacion.Usuarios;
 
@@ -27,7 +28,7 @@ public class LoginUseCase
         var usuario = _usuarioRepo.ObtenerPorCorreo(request.CorreoElectronico);
         if (usuario == null)
         {
-            throw new DominioException("El corre electronico o la contraseña son incorrectos.");
+            throw new AutorizacionException("El correp electronico o la contraseña son incorrectos.");
         }
 
         string hashEntrada = _hashService.CalcularHash(request.Contrasena);

@@ -1,27 +1,22 @@
-namespace SGE.Infraestructura;
-
-using SGE.Aplicacion.Servicios;
-using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
+using SGE.Aplicacion.Servicios;
 
-public record class ServicioHash : IHashService
+namespace SGE.Infraestructura;
+
+public class ServicioHash : IHashService 
 {
-    public String calcularHash(String contrasenaPlana)
+    public string CalcularHash(string contrasenaPlana)
     {
-        SHA256 sha256 = SHA256.Create();
+        using var sha256 = SHA256.Create();
         
-        byte [] vectorEntrada = Encoding.UTF32.GetBytes(contrasenaPlana);
-
-        byte [] vectorHash = sha256.ComputeHash(vectorEntrada);
-
-        StringBuilder constructorString = new StringBuilder();
-
-        foreach(byte b in vectorHash)
+        var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(contrasenaPlana));
+        
+        var builder = new StringBuilder();
+        foreach (var b in bytes)
         {
-            constructorString.Append(b.ToString("x2"));
+            builder.Append(b.ToString("x2"));
         }
-
-        return constructorString.ToString();
+        return builder.ToString();
     }
 }

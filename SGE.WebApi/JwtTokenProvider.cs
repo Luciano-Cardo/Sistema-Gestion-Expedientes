@@ -25,7 +25,7 @@ namespace SGE.WebApi.Servicios
                 throw new InvalidOperationException("La clave secreta JWT no está configurada.");
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
