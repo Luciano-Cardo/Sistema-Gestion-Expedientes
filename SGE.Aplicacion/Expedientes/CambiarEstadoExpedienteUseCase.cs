@@ -1,6 +1,7 @@
 using SGE.Dominio.Autorizacion;
 using SGE.Aplicacion.Comun;
-
+using SGE.Aplicacion.Interfaces;
+using SGE.Aplicacion.Autorizacion;
 namespace SGE.Aplicacion.Expedientes;
 
 public class CambiarEstadoExpedienteUseCase

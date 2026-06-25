@@ -1,5 +1,5 @@
 namespace SGE.Aplicacion.Expedientes;
- 
+using SGE.Aplicacion.Interfaces;
 public class ListarExpedientesUseCase
 {
     private readonly IExpedienteRepository _repo;

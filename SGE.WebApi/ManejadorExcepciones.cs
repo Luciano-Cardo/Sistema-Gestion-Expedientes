@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using SGE.Aplicacion.Comun;
-
+using SGE.Dominio.Comun;
 namespace SGE.WebApi.Middlewares;
 
 public class ManejadorExcepciones : IExceptionHandler
@@ -10,10 +10,10 @@ public class ManejadorExcepciones : IExceptionHandler
 
     public ManejadorExcepciones(ILogger<ManejadorExcepciones> registro)
     {
-        this.registro = registro;
+        _registro = registro; 
     }
 
-    public async ValueTask<bool> ManejarError(HttpContext httpContext,Exception exception,CancellationToken cancellationToken)
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
         _registro.LogError(exception, "Ocurrió un error no controlado: {Message}", exception.Message);
 

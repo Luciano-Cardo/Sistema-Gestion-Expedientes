@@ -3,6 +3,7 @@ using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Interfaces;
 using SGE.Aplicacion.Servicios;
+using SGE.Aplicacion.Autorizacion;
 
 namespace SGE.Aplicacion.Tramites;
 

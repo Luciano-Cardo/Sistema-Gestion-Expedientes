@@ -1,6 +1,8 @@
 using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Interfaces;
 using SGE.Dominio.Autorizacion;
 using SGE.Dominio.Expedientes;
+using SGE.Aplicacion.Autorizacion;
 namespace SGE.Aplicacion.Expedientes;
 
 public class AgregarExpedienteUseCase

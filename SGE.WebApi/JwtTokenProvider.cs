@@ -1,46 +1,29 @@
-using System.IdentityModel.Tokens.Jwt;
+namespace SGE.WebApi;
+
 using System.Security.Claims;
 using System.Text;
+using SGE.Aplicacion.Servicios;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using SGE.Aplicacion.Interfaces;
+using System.IdentityModel.Tokens.Jwt; 
 using SGE.Dominio.Entidades;
-
-namespace SGE.WebApi.Servicios
+public class JwtTokenProvider(IConfiguration config) : ITokenService
 {
-    public class JwtTokenProvider : ITokenService
+    public string GenerarToken(Guid usuarioId)
     {
-        private readonly IConfiguration _config;
-
-        public JwtTokenProvider(IConfiguration config)
-        {
-            _config = config;
-        }
-
-        public string GenerarToken(Usuario usuario)
-        {
-            var keyString = _config["Jwt:Key"]; 
-            if (string.IsNullOrEmpty(keyString))
-            {
-                throw new InvalidOperationException("La clave secreta JWT no está configurada.");
-            }
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, usuario.Id.ToString()),
-                new Claim("esAdministrador", usuario.esAdministrador.ToString())
-            };
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddHours(2),
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-    }
+        var claims = new [] {new Claim("ID", usuarioId.ToString())};
+        
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jtw:Key"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+            issuer : config ["Jwt:Issuer"],
+            audience : config["Jwt:Audience"],
+            claims : claims,
+            expires : DateTime.UtcNow.AddHours(2),
+            signingCredentials : creds
+        );
+        return new JwtSecurityTokenHandler().WriteToken(token); 
+    } 
 }
+
+//cosas de Jwt.

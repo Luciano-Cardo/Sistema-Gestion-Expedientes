@@ -1,5 +1,8 @@
 using SGE.Dominio.Autorizacion;
 using SGE.Aplicacion.Interfaces;
+using SGE.Aplicacion.Usuarios;
+using SGE.Dominio.Entidades;
+namespace SGE.Aplicacion.Autorizacion;
 public class AutorizacionService : IAutorizacionService
 {
     private readonly IUsuarioRepository _usuarioRepo;

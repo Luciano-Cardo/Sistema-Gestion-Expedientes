@@ -1,0 +1,9 @@
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.AssemblyInfo.cs
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.WebApi\obj\Debug\net10.0\SGE.WebApi.sourcelink.json

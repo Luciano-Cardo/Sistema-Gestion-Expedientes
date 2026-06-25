@@ -20,7 +20,7 @@ public class ListarUsuariosUseCase
             throw new AutorizacionException("Acceso denegado: se necesitan permisos de administrador.");
         }
 
-        List<Usuario> usuarios = _usuarioRepo.ObtenerTodos();
+        var usuarios = _usuarioRepo.ObtenerTodos();
     
         var usuariosDto = usuarios.Select(u => 
             new UsuarioDTO(u.Id, u.Nombre, u.CorreoElectronico, u.EsAdministrador, u.ListaPermisos)).ToList();

@@ -22,3 +22,15 @@ C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dom
 C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
 C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
 C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.sourcelink.json
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
