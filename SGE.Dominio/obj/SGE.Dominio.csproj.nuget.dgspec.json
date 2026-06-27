@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj": {}
+    "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj": {
+    "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj",
         "projectName": "SGE.Dominio",
-        "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj",
+        "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj",
         "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\obj\\",
+        "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config"
