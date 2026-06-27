@@ -1,0 +1,30 @@
+using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Interfaces;
+using SGE.Dominio.Entidades;
+
+namespace SGE.Aplicacion.Usuarios;
+
+public class ListarUsuariosUseCase
+{
+    private readonly IUsuarioRepository _usuarioRepo;
+    public ListarUsuariosUseCase(IUsuarioRepository usuariorepo)
+    {
+        _usuarioRepo = usuariorepo;
+    }
+
+    public ListarUsuariosResponse Ejecutar(ListarUsuariosRequest request)
+    {
+        var origen = _usuarioRepo.ObtenerPorId(request.Id);
+        if(origen == null || !origen.EsAdministrador)
+        {
+            throw new AutorizacionException("Acceso denegado: se necesitan permisos de administrador.");
+        }
+
+        var usuarios = _usuarioRepo.ObtenerTodos();
+    
+        var usuariosDto = usuarios.Select(u => 
+            new UsuarioDTO(u.Id, u.Nombre, u.CorreoElectronico, u.EsAdministrador, u.ListaPermisos)).ToList();
+
+        return new ListarUsuariosResponse(usuariosDto);
+    }
+}

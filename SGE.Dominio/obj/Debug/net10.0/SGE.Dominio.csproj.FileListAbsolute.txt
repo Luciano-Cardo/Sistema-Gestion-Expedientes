@@ -1,0 +1,58 @@
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.sourcelink.json
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\SGE\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.sourcelink.json
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\astor\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.sourcelink.json
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\User\Desktop\Facultad PC\2do año\.NET\Sistema-Gestion-Expedientes\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-main\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\lucia\OneDrive\Desktop\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll

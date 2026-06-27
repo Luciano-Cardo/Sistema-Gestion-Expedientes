@@ -1,0 +1,5 @@
+C:\Users\lucia\OneDrive\Desktop\SGE\obj\Debug\net10.0\SGE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucia\OneDrive\Desktop\SGE\obj\Debug\net10.0\SGE.AssemblyInfoInputs.cache
+C:\Users\lucia\OneDrive\Desktop\SGE\obj\Debug\net10.0\SGE.AssemblyInfo.cs
+C:\Users\lucia\OneDrive\Desktop\SGE\obj\Debug\net10.0\SGE.csproj.CoreCompileInputs.cache
+C:\Users\lucia\OneDrive\Desktop\SGE\obj\Debug\net10.0\SGE.sourcelink.json
