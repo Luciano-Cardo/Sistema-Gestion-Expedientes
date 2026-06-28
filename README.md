@@ -197,7 +197,9 @@ Seguís logueado como `prueba1@sge.com` (que **no** tiene `TramiteModificacion`)
 Probá `PUT /api/expedientes/{expedienteId}/tramites/{tramiteId}`:
 ```json
 {
-  "nuevoContenido": "Intento de modificación sin permiso"
+  "idTramite": "<ID del trámite>",
+  "nuevoContenido": "Intento de modificación",
+  "idUsuario": "<ID del usuario logueado>"
 }
 ```
 **Esperado:** `403 Forbidden` (`AutorizacionException`), porque `prueba1` solo
@@ -221,7 +223,10 @@ Requiere `ExpedienteModificacion`. Si `prueba1` no lo tiene, otorgáselo como ad
 que en el paso 13) y luego probá:
 ```json
 {
-  "nuevaCaratula": "Expediente de prueba - construcción ilegal - CORREGIDO"
+  {
+  "id": "<ID del expediente>",
+  "nuevaCaratula": "Expediente de prueba - CORREGIDO",
+  "usuarioUltimoCambio": "<ID del usuario logueado>"
 }
 ```
 **Esperado:** `200 OK`.
@@ -229,7 +234,9 @@ que en el paso 13) y luego probá:
 ### Paso 16 — Cambiar el estado manualmente (`PUT /api/expedientes/{id}/estado`)
 ```json
 {
-  "nuevoEstado": "EnNotificacion"
+  "id": "<ID del expediente>",
+  "nuevoEstado": "EnNotificacion",
+  "usuarioUltimoCambio": "<ID del usuario logueado>"
 }
 ```
 **Esperado:** `200 OK`. El estado se actualiza sin pasar por un trámite.
@@ -243,8 +250,9 @@ Requiere `TramiteBaja` (o `ExpedienteBaja`, que la habilita indirectamente).
 Logueado como cualquier usuario, probá modificar tu propio nombre y/o contraseña:
 ```json
 {
-  "nombre": "Usuario Prueba 1 (editado)",
-  "contrasena": "NuevaClave456"
+  "id": "<ID del usuario logueado>",
+  "contrasena": "NuevaClave456",
+  "nombre": "Usuario Prueba 1 (editado)"
 }
 ```
 **Esperado:** `204 No Content`. Verificá luego que el login con la nueva contraseña
