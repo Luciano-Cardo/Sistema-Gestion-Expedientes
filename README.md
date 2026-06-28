@@ -168,8 +168,8 @@ Usando el `id` del paso 6.
 ### Paso 9 — Agregar un trámite (`POST /api/expedientes/{expedienteId}/tramites`)
 ```json
 {
-  "usuarioUltimoCambio": "GUID-del-usuario-logueado",
-  "expedienteId": "72583b52-279c-4fd0-aeb2-5070a83b4cda",
+  "usuarioUltimoCambio": "<ID del usuario logueado>",
+  "expedienteId": "<ID del expediente creado en el paso 6>",
   "etiqueta": "EscritoPresentado",
   "contenido": "Se presenta el escrito inicial"
 }
@@ -179,6 +179,8 @@ Usando el `id` del paso 6.
 ### Paso 10 — Agregar un segundo trámite con cambio de estado automático
 ```json
 {
+  "usuarioUltimoCambio": "<ID del usuario logueado>",
+  "expedienteId": "<ID del expediente creado en el paso 6>",
   "etiqueta": "PaseAEstudio",
   "contenido": "Pase a estudio del departamento técnico"
 }
