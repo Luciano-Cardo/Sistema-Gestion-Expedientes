@@ -150,7 +150,7 @@ Reemplazá el Bearer Token en Scalar por este nuevo token (usuario con permisos
 ### Paso 6 — Crear un expediente (`POST /api/expedientes`)
 ```json
 {
-  "caratula": "Expediente de prueba - construcción ilegal"
+  "Nuevacaratula": "Expediente de prueba - construcción ilegal"
 }
 ```
 **Esperado:** `201 Created`, con el `id` del expediente. **Guardá ese `id`**, se usa en
