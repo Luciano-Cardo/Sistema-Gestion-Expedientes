@@ -131,7 +131,9 @@ Como administrador, asignale al usuario creado en el paso 1 el permiso `Expedien
 
 ```json
 {
-  "permiso": "ExpedienteAlta",
+  "idOrigen": "GUID-del-admin",
+  "idAEditar": "GUID-del-usuario-a-modificar",
+  "nuevoPermiso": "ExpedienteAlta",
   "asignar": true
 }
 ```
