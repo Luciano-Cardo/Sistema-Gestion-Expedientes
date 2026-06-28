@@ -19,10 +19,11 @@ La aplicación levanta (perfil `https`, ver `Properties/launchSettings.json`) en
 - `https://localhost:7190`
 - `http://localhost:5199`
 
-La documentación interactiva de Scalar está disponible en:
+La documentación interactiva de Scalar está disponible en una de estas URLs dependiendo del perfil usado:
 
 ```
-https://localhost:7190/scalar/v1
+https://localhost:7190/scalar/v1  (perfil https)
+http://localhost:5199/scalar/v1   (perfil http)
 ```
 
 > Al iniciar, `InicializadorBD` crea automáticamente la base SQLite (`Sge.sqLite`) y la
