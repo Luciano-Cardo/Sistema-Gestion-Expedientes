@@ -168,6 +168,8 @@ Usando el `id` del paso 6.
 ### Paso 9 — Agregar un trámite (`POST /api/expedientes/{expedienteId}/tramites`)
 ```json
 {
+  "usuarioUltimoCambio": "GUID-del-usuario-logueado",
+  "expedienteId": "72583b52-279c-4fd0-aeb2-5070a83b4cda",
   "etiqueta": "EscritoPresentado",
   "contenido": "Se presenta el escrito inicial"
 }
