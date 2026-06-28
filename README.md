@@ -43,6 +43,7 @@ Estas son las credenciales reales definidas en `SGE.Infraestructura/Inicializado
 
 > Las contraseñas se almacenan hasheadas en la base; las de la tabla de arriba son las
 > que hay que escribir en el endpoint de login, en texto plano.
+> 
 > Nota: En varios endpoints se requiere el campo usuarioUltimoCambio o idUsuario. Este valor corresponde al ID del usuario con el que estás logueado actualmente. Para obtenerlo, hacé GET
 > /api/usuarios con el token de administrador y copiá el ID del usuario correspondiente.
 
