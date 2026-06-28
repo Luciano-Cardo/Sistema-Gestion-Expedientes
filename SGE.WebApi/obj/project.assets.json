@@ -976,11 +976,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.WebApi\\SGE.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.WebApi\\SGE.WebApi.csproj",
       "projectName": "SGE.WebApi",
-      "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.WebApi\\SGE.WebApi.csproj",
+      "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.WebApi\\SGE.WebApi.csproj",
       "packagesPath": "C:\\Users\\lucia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lucia\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -995,14 +995,14 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
             },
-            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj": {
-              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Dominio\\SGE.Dominio.csproj"
+            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj": {
+              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Dominio\\SGE.Dominio.csproj"
             },
-            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Infraestructura\\SGE.Infraestructura.csproj": {
-              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes-bda29f908ae88056aa67110db81a8cfc27831dbe\\SGE.Infraestructura\\SGE.Infraestructura.csproj"
+            "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Infraestructura\\SGE.Infraestructura.csproj": {
+              "projectPath": "C:\\Users\\lucia\\OneDrive\\Desktop\\Sistema-Gestion-Expedientes\\SGE.Infraestructura\\SGE.Infraestructura.csproj"
             }
           }
         }

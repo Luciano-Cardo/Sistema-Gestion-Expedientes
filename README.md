@@ -1,353 +1,308 @@
-# Sistema-Gestion-Expedientes
-Sistema de Gestión de Expedientes desarrollado en C# .NET utilizando Clean Architecture y Domain Driven Design (DDD).
+# SGE — Guía de Prueba de Endpoints desde Scalar
 
-# SGE — Sistema de Gestión de Expedientes
-## Documento Explicativo — Fase 1
- 
+Este documento detalla el **orden recomendado** para probar los endpoints de la API del
+Sistema de Gestión de Expedientes (SGE) usando la interfaz de **Scalar**, junto con las
+**credenciales** de los usuarios precargados por el sistema al iniciar la aplicación.
+
 ---
- 
-## Cómo ejecutar el proyecto
- 
-Desde la carpeta raíz de la solución, ejecutar:
- 
+
+## 1. Cómo levantar la API y acceder a Scalar
+
+Desde la raíz de la solución:
+
+```bash
+dotnet run --project SGE.WebApi
 ```
-dotnet run --project SGE.Consola
+
+La aplicación levanta (perfil `https`, ver `Properties/launchSettings.json`) en:
+
+- `https://localhost:7190`
+- `http://localhost:5199`
+
+La documentación interactiva de Scalar está disponible en:
+
 ```
- 
+https://localhost:7190/scalar/v1
+```
+
+> Al iniciar, `InicializadorBD` crea automáticamente la base SQLite (`Sge.sqLite`) y la
+> precarga con un administrador y dos usuarios de prueba **solo si la tabla de usuarios
+> está vacía**. Si ya existe una base con datos, no se vuelve a sembrar.
+
 ---
- 
-## Estructura del Program.cs
- 
-El `Program.cs` actúa como **Composition Root**: instancia todos los repositorios y servicios de infraestructura, los inyecta en los casos de uso, y luego simula un flujo completo de operaciones.
- 
-```csharp
-// Infraestructura
-IExpedienteRepository expedienteRepo = new ExpedienteTxtRepository();
-ITramiteRepository    tramiteRepo    = new TramiteTxtRepository();
-IAutorizacionService  autorizacion   = new AutorizacionProvisionalService();
- 
-// Servicio de aplicación
-var servicioEstado = new ActualizacionEstadoExpedienteService(expedienteRepo, tramiteRepo);
- 
-// Casos de uso
-var agregarExpediente  = new AgregarExpedienteUseCase(expedienteRepo, autorizacion);
-var eliminarExpediente = new EliminarExpedienteUseCase(expedienteRepo, tramiteRepo, autorizacion);
-var modificarCaratula  = new ModificarCaratulaExpedienteUseCase(expedienteRepo, autorizacion);
-var cambiarEstado      = new CambiarEstadoExpedienteUseCase(expedienteRepo, autorizacion);
-var listarExpedientes  = new ListarExpedientesUseCase(expedienteRepo);
-var agregarTramite     = new AgregarTramiteUseCase(tramiteRepo, expedienteRepo, autorizacion, servicioEstado);
-var eliminarTramite    = new EliminarTramiteUseCase(tramiteRepo, expedienteRepo, autorizacion, servicioEstado);
-var modificarTramite   = new ModificarTramiteUseCase(tramiteRepo, expedienteRepo, autorizacion, servicioEstado);
-var listarTramites     = new ListarTramitesPorExpedienteUseCase(tramiteRepo);
-```
- 
+
+## 2. Credenciales precargadas (seed)
+
+Estas son las credenciales reales definidas en `SGE.Infraestructura/InicializadorBD.cs`:
+
+| Rol | Nombre | Correo electrónico | Contraseña | Permisos |
+|---|---|---|---|---|
+| **Administrador** | Administrador Principal | `admin@sge.com` | `admin123` | Todos (es administrador, `EsAdministrador = true`) |
+| **Usuario de prueba 1** | Usuario Prueba 1 | `prueba1@sge.com` | `123456` | `ExpedienteAlta`, `TramiteAlta` |
+| **Usuario de prueba 2** | Usuario Prueba 2 | `prueba2@sge.com` | `123456` | Ninguno (sirve para probar el camino de error "sin autorización") |
+
+> Las contraseñas se almacenan hasheadas en la base; las de la tabla de arriba son las
+> que hay que escribir en el endpoint de login, en texto plano.
+
 ---
- 
-## Camino Feliz
- 
-### 1. Alta de Expedientes
- 
-Se crean dos expedientes. Al crearse, su estado inicial es siempre `RecienIniciado`.
- 
-```csharp
-var r1 = agregarExpediente.Ejecutar(
-    new AgregarExpedienteRequest("Expediente sobre construcción ilegal", usuarioId));
-expId1 = r1.id;
-Console.WriteLine($"Expediente 1 creado. ID: {expId1}");
- 
-var r2 = agregarExpediente.Ejecutar(
-    new AgregarExpedienteRequest("Expediente de habilitación comercial", usuarioId));
-expId2 = r2.id;
-Console.WriteLine($"Expediente 2 creado. ID: {expId2}");
-```
- 
-**Salida por consola:**
-```
---Alta de expedientes--
-Expediente 1 creado. ID: a3f1c2d4-8e5b-4a7f-9c1d-2b3e4f5a6b7c
-Expediente 2 creado. ID: b4e2d3c5-9f6a-5b8e-0d2e-3c4f5a6b7c8d
-```
- 
+
+## 3. Permiso requerido por cada operación
+
+Antes de probar, conviene tener claro qué permiso exige cada endpoint protegido (definido
+en cada caso de uso de `SGE.Aplicacion`):
+
+| Endpoint | Permiso requerido |
+|---|---|
+| `POST /api/expedientes` | `ExpedienteAlta` |
+| `PUT /api/expedientes/{id}/caratula` | `ExpedienteModificacion` |
+| `PUT /api/expedientes/{id}/estado` | `ExpedienteModificacion` |
+| `DELETE /api/expedientes/{id}` | `ExpedienteBaja` |
+| `POST /api/expedientes/{expedienteId}/tramites` | `TramiteAlta` |
+| `PUT /api/expedientes/{expedienteId}/tramites/{tramiteId}` | `TramiteModificacion` |
+| `DELETE /api/expedientes/{expedienteId}/tramites/{tramiteId}` | `TramiteBaja` |
+| `DELETE /api/usuarios/{id}` | Ser administrador |
+| `PUT /api/usuarios/{id}/permisos` | Ser administrador |
+| `GET /api/usuarios` | Ser administrador |
+
+Regla especial (`AutorizacionService`): un usuario con permiso `ExpedienteBaja` también
+queda habilitado automáticamente para `TramiteBaja`. El **administrador** tiene acceso
+total a todo, sin necesidad de permisos individuales.
+
+### Códigos HTTP devueltos según el tipo de excepción
+
+Confirmado en `SGE.WebApi/Middlewares/ManejadorExcepciones.cs`:
+
+| Excepción | Código HTTP |
+|---|---|
+| `DominioException` (validación de negocio) | **400 Bad Request** |
+| `AutorizacionException` (sin permiso / credenciales no válidas en login) | **403 Forbidden** |
+| `EntidadNoEncontradaException` (recurso no existe) | **404 Not Found** |
+| Falta de token JWT o token inválido | **401 Unauthorized** (lo genera el middleware de autenticación, antes de llegar a `ManejadorExcepciones`) |
+| Cualquier otra excepción no controlada | 500 Internal Server Error |
+
 ---
- 
-### 2. Listado de Expedientes
- 
-```csharp
-foreach (var exp in listarExpedientes.Ejecutar(new ListarExpedientesRequest()))
-    Console.WriteLine($"[{exp.Estado}] {exp.Caratula.Valor}");
+
+## 4. Orden recomendado de prueba en Scalar
+
+### Paso 0 — Probar sin token (caso negativo)
+Antes de loguearte, probá llamar a `GET /api/expedientes` sin Authorization.
+**Esperado:** `401 Unauthorized`. Este código lo devuelve el middleware de autenticación
+JWT de ASP.NET Core (no pasa por el manejador de excepciones de la aplicación), por eso
+es el único caso de toda la guía con `401`.
+
+### Paso 1 — Registro de un nuevo usuario (`POST /api/usuarios/registro`)
+Endpoint anónimo (`AllowAnonymous`). Usalo para crear un usuario adicional propio, por
+ejemplo:
+
+```json
+{
+  "correoElectronico": "tester@sge.com",
+  "nombre": "Usuario Tester",
+  "contrasena": "Tester123"
+}
 ```
- 
-**Salida por consola:**
+
+**Esperado:** `201 Created` con el `Id` del nuevo usuario. Este usuario nace **sin
+permisos y sin ser administrador**, igual que "Usuario Prueba 2".
+
+### Paso 2 — Login como administrador (`POST /api/usuarios/login`)
+```json
+{
+  "correoElectronico": "admin@sge.com",
+  "contrasena": "admin123"
+}
 ```
---Listado de expedientes--
-[RecienIniciado] Expediente sobre construcción ilegal
-[RecienIniciado] Expediente de habilitación comercial
+
+**Esperado:** `200 OK` con un `token` JWT. Copiá ese token y cargalo en Scalar con el
+botón de **Authorization → Bearer Token**, para que las siguientes llamadas vayan
+autenticadas como administrador.
+
+### Paso 3 — Listar usuarios (`GET /api/usuarios`) — solo admin
+Con el token de administrador activo, probá listar todos los usuarios.
+**Esperado:** `200 OK` con el listado completo (admin + prueba1 + prueba2 + el que
+registraste en el paso 1).
+
+> Probá repetir este paso logueado como `prueba1@sge.com` o `prueba2@sge.com`:
+> **esperado `403 Forbidden`**, ya que el caso de uso lanza `AutorizacionException`
+> al no ser administradores (confirmado en `ManejadorExcepciones.cs`).
+
+### Paso 4 — Asignar permisos al usuario nuevo (`PUT /api/usuarios/{id}/permisos`)
+Como administrador, asignale al usuario creado en el paso 1 el permiso `ExpedienteAlta`:
+
+```json
+{
+  "permiso": "ExpedienteAlta",
+  "asignar": true
+}
 ```
- 
+**Esperado:** `204 No Content`.
+
+### Paso 5 — Login como Usuario Prueba 1 (`POST /api/usuarios/login`)
+```json
+{
+  "correoElectronico": "prueba1@sge.com",
+  "contrasena": "123456"
+}
+```
+Reemplazá el Bearer Token en Scalar por este nuevo token (usuario con permisos
+`ExpedienteAlta` y `TramiteAlta`, pero no administrador).
+
+### Paso 6 — Crear un expediente (`POST /api/expedientes`)
+```json
+{
+  "caratula": "Expediente de prueba - construcción ilegal"
+}
+```
+**Esperado:** `201 Created`, con el `id` del expediente. **Guardá ese `id`**, se usa en
+los pasos siguientes. Estado inicial: `RecienIniciado`.
+
+### Paso 7 — Listar expedientes (`GET /api/expedientes`)
+**Esperado:** `200 OK` con el expediente recién creado.
+
+### Paso 8 — Obtener expediente con detalle (`GET /api/expedientes/{id}`)
+Usando el `id` del paso 6.
+**Esperado:** `200 OK` con los datos del expediente (sin trámites todavía).
+
+### Paso 9 — Agregar un trámite (`POST /api/expedientes/{expedienteId}/tramites`)
+```json
+{
+  "etiqueta": "EscritoPresentado",
+  "contenido": "Se presenta el escrito inicial"
+}
+```
+**Esperado:** `201 Created` con el `id` del trámite. Guardalo también.
+
+### Paso 10 — Agregar un segundo trámite con cambio de estado automático
+```json
+{
+  "etiqueta": "PaseAEstudio",
+  "contenido": "Pase a estudio del departamento técnico"
+}
+```
+**Esperado:** `201 Created`. Al ser el trámite `PaseAEstudio`, el sistema cambia
+automáticamente el estado del expediente. Confirmalo repitiendo el **Paso 8**: el estado
+debería ser ahora `ParaResolver`.
+
+### Paso 11 — Listar trámites del expediente (`GET /api/expedientes/{expedienteId}/tramites`)
+**Esperado:** `200 OK` con los dos trámites creados.
+
+### Paso 12 — Intentar modificar un trámite sin el permiso adecuado (caso negativo)
+Seguís logueado como `prueba1@sge.com` (que **no** tiene `TramiteModificacion`).
+Probá `PUT /api/expedientes/{expedienteId}/tramites/{tramiteId}`:
+```json
+{
+  "nuevoContenido": "Intento de modificación sin permiso"
+}
+```
+**Esperado:** `403 Forbidden` (`AutorizacionException`), porque `prueba1` solo
+tiene `ExpedienteAlta` y `TramiteAlta`.
+
+### Paso 13 — Volver a loguearse como administrador y otorgar el permiso faltante
+Repetí el **Paso 2** (login admin) y luego `PUT /api/usuarios/{idDePrueba1}/permisos`:
+```json
+{
+  "permiso": "TramiteModificacion",
+  "asignar": true
+}
+```
+
+### Paso 14 — Reintentar la modificación del trámite (ahora con permiso)
+Logueate de nuevo como `prueba1@sge.com` (Paso 5) y repetí el **Paso 12**.
+**Esperado:** `200 OK`, el contenido del trámite queda actualizado.
+
+### Paso 15 — Modificar la carátula del expediente (`PUT /api/expedientes/{id}/caratula`)
+Requiere `ExpedienteModificacion`. Si `prueba1` no lo tiene, otorgáselo como admin (igual
+que en el paso 13) y luego probá:
+```json
+{
+  "nuevaCaratula": "Expediente de prueba - construcción ilegal - CORREGIDO"
+}
+```
+**Esperado:** `200 OK`.
+
+### Paso 16 — Cambiar el estado manualmente (`PUT /api/expedientes/{id}/estado`)
+```json
+{
+  "nuevoEstado": "EnNotificacion"
+}
+```
+**Esperado:** `200 OK`. El estado se actualiza sin pasar por un trámite.
+
+### Paso 17 — Eliminar un trámite (`DELETE /api/expedientes/{expedienteId}/tramites/{tramiteId}`)
+Requiere `TramiteBaja` (o `ExpedienteBaja`, que la habilita indirectamente).
+**Esperado:** `200 OK` si el usuario tiene el permiso; de lo contrario, `403 Forbidden` —
+útil para verificar la regla especial mencionada en la sección 3.
+
+### Paso 18 — Probar "mis datos" (`PUT /api/usuarios/mis-datos`)
+Logueado como cualquier usuario, probá modificar tu propio nombre y/o contraseña:
+```json
+{
+  "nombre": "Usuario Prueba 1 (editado)",
+  "contrasena": "NuevaClave456"
+}
+```
+**Esperado:** `204 No Content`. Verificá luego que el login con la nueva contraseña
+funcione.
+
+### Paso 19 — Eliminar un expediente en cascada (`DELETE /api/expedientes/{id}`)
+Logueado como administrador o como un usuario con `ExpedienteBaja`.
+**Esperado:** `200 OK`. Esto elimina primero los trámites asociados y luego el
+expediente. Confirmalo repitiendo el **Paso 7**: el expediente ya no debe aparecer.
+
+### Paso 20 — Eliminar un usuario (`DELETE /api/usuarios/{idAEliminar}`) — solo admin
+Logueado como administrador, eliminá el usuario creado en el **Paso 1**.
+**Esperado:** `204 No Content`.
+
+### Paso 21 — Caso de error: expediente inexistente
+Probá `GET /api/expedientes/{guid-inventado}` con un GUID que no exista.
+**Esperado:** `404 Not Found` (`EntidadNoEncontradaException`).
+
+### Paso 22 — Caso de error: login con credenciales inválidas
+Hay dos variantes, y devuelven códigos distintos (`LoginUseCase.cs`):
+
+**a) Correo que no existe:**
+```json
+{
+  "correoElectronico": "noexiste@sge.com",
+  "contrasena": "cualquiera"
+}
+```
+**Esperado:** `403 Forbidden` (el caso de uso lanza `AutorizacionException`).
+
+**b) Correo correcto, contraseña incorrecta:**
+```json
+{
+  "correoElectronico": "admin@sge.com",
+  "contrasena": "claveIncorrecta"
+}
+```
+**Esperado:** `400 Bad Request` (el caso de uso lanza `DominioException`).
+
+### Paso 23 — Caso de error: registrar un correo ya existente
+```json
+{
+  "correoElectronico": "admin@sge.com",
+  "nombre": "Otro Admin",
+  "contrasena": "loquesea123"
+}
+```
+**Esperado:** `400 Bad Request` (`DominioException`: el correo ya está registrado).
+Confirmado en `RegistrarUsuarioUseCase.cs`.
+
 ---
- 
-### 3. Alta de Trámites con Cambio de Estado Automático
- 
-Al agregar un trámite con etiqueta `PaseAEstudio`, el sistema detecta que es el último trámite y cambia automáticamente el estado del expediente a `ParaResolver`.
- 
-```csharp
-var rt1 = agregarTramite.Ejecutar(new AgregarTramiteRequest(
-    usuarioId, expId1, EtiquetaTramite.EscritoPresentado,
-    new ContenidoTramite("Se presenta el escrito inicial")));
-tramiteId1 = rt1.Id;
-Console.WriteLine($"Tramite 'EscritoPresentado' agregado. ID: {tramiteId1}");
- 
-var rt2 = agregarTramite.Ejecutar(new AgregarTramiteRequest(
-    usuarioId, expId1, EtiquetaTramite.PaseAEstudio,
-    new ContenidoTramite("Pase a estudio del departamento técnico")));
-tramiteId2 = rt2.Id;
-Console.WriteLine($"Tramite 'PaseAEstudio' agregado. El expediente debería pasar a 'ParaResolver'");
+
+## 5. Resumen rápido de credenciales para copiar y pegar
+
 ```
- 
-**Salida por consola:**
-```
---Alta de tramites--
-Tramite 'EscritoPresentado' agregado. ID: c5f3e4d6-0a7b-6c9f-1e3f-4d5a6b7c8d9e
-Tramite 'PaseAEstudio' agregado. El expediente debería pasar a 'ParaResolver'
-```
- 
----
- 
-### 4. Verificación del Cambio de Estado Automático
- 
-```csharp
-foreach (var exp in listarExpedientes.Ejecutar(new ListarExpedientesRequest()))
-    Console.WriteLine($"[{exp.Estado}] {exp.Caratula.Valor}");
-```
- 
-**Salida por consola:**
-```
---Estado de expedientes tras agregar trámites--
-[ParaResolver] Expediente sobre construcción ilegal
-[RecienIniciado] Expediente de habilitación comercial
-```
- 
-El expediente 1 pasó a `ParaResolver` automáticamente. El expediente 2 sigue en `RecienIniciado` porque no tiene trámites.
- 
----
- 
-### 5. Listado de Trámites por Expediente
- 
-```csharp
-foreach (var t in listarTramites.Ejecutar(new ListarTramitesPorExpedienteRequest(expId1)))
-    Console.WriteLine($"[{t.Etiqueta}] {t.Contenido.Valor}");
-```
- 
-**Salida por consola:**
-```
---Trámites del expediente 1
-[EscritoPresentado] Se presenta el escrito inicial
-[PaseAEstudio] Pase a estudio del departamento técnico
-```
- 
----
- 
-### 6. Agregar Trámite "Resolución" → Estado pasa a ConResolucion
- 
-```csharp
-agregarTramite.Ejecutar(new AgregarTramiteRequest(
-    usuarioId, expId1, EtiquetaTramite.Resolucion,
-    new ContenidoTramite("Se emite resolución favorable")));
-Console.WriteLine("Tramite 'Resolución' agregado. El expediente debería pasar a 'ConResolucion'");
-```
- 
-**Salida por consola:**
-```
---Agregar tramite 'Resolucion'--
-Tramite 'Resolución' agregado. El expediente debería pasar a 'ConResolucion'
-```
- 
----
- 
-### 7. Cambio de Estado Manual
- 
-El usuario puede cambiar el estado manualmente sin necesidad de agregar un trámite. En este caso se pasa a `EnNotificacion` aunque el último trámite sea una `Resolución`.
- 
-```csharp
-cambiarEstado.Ejecutar(new CambiarEstadoExpedienteRequest(
-    expId1, EstadoExpediente.EnNotificacion, usuarioId));
-Console.WriteLine("Estado cambiado manualmente a 'EnNotificacion'");
-```
- 
-**Salida por consola:**
-```
---Cambio de estado manual a 'EnNotificacion'--
-Estado cambiado manualmente a 'EnNotificacion'
-```
- 
----
- 
-### 8. Modificar Carátula
- 
-```csharp
-modificarCaratula.Ejecutar(new ModificarCaratulaExpedienteRequest(
-    expId1, "Expediente sobre construcción ilegal - CORREGIDO", usuarioId));
-Console.WriteLine("Caratula modificada correctamente");
-```
- 
-**Salida por consola:**
-```
---Modificar caratula del expediente 1--
-Caratula modificada correctamente
-```
- 
----
- 
-### 9. Modificar Contenido de un Trámite
- 
-```csharp
-modificarTramite.Ejecutar(new ModificarTramiteRequest(
-    tramiteId1,
-    new ContenidoTramite("Escrito inicial corregido con documentación adicional"),
-    usuarioId));
-Console.WriteLine("Tramite modificado correctamente");
-```
- 
-**Salida por consola:**
-```
---Modificar contenido de un tramite--
-Tramite modificado correctamente
-```
- 
----
- 
-### 10. Eliminar un Trámite
- 
-```csharp
-eliminarTramite.Ejecutar(new EliminarTramiteRequest(usuarioId, tramiteId1));
-Console.WriteLine($"Trámite {tramiteId1} eliminado");
-```
- 
-**Salida por consola:**
-```
---Eliminar tramite--
-Trámite c5f3e4d6-0a7b-6c9f-1e3f-4d5a6b7c8d9e eliminado
-```
- 
----
- 
-### 11. Eliminar Expediente en Cascada
- 
-Al eliminar un expediente, el sistema elimina primero todos sus trámites asociados y luego el expediente.
- 
-```csharp
-eliminarExpediente.Ejecutar(new EliminarExpedienteRequest(expId2, usuarioId));
-Console.WriteLine("Expediente 2 eliminado junto con todos sus tramites");
-```
- 
-**Salida por consola:**
-```
---Eliminar expediente 2 (con sus tramites)--
-Expediente 2 eliminado junto con todos sus tramites
-```
- 
----
- 
-### 12. Listado Final
- 
-```csharp
-foreach (var exp in listarExpedientes.Ejecutar(new ListarExpedientesRequest()))
-    Console.WriteLine($"[{exp.Estado}] {exp.Caratula.Valor}");
-```
- 
-**Salida por consola:**
-```
---Listado final de expedientes--
-[EnNotificacion] Expediente sobre construcción ilegal - CORREGIDO
-```
- 
-Solo queda el expediente 1 con la carátula corregida y el estado actualizado. El expediente 2 fue eliminado.
- 
----
- 
-## Caminos de Error
- 
-### Error 1: Carátula vacía → DominioException
- 
-El Value Object `Caratula` valida que el texto no sea vacío. Si lo es, lanza una `DominioException` antes de que la entidad llegue a crearse.
- 
-```csharp
-agregarExpediente.Ejecutar(new AgregarExpedienteRequest("", usuarioId));
-```
- 
-**Salida por consola:**
-```
---Error 1: caratula vacia--
-[DominioException] La caratula no puede estar vacia
-```
- 
----
- 
-### Error 2: Contenido de trámite vacío → DominioException
- 
-El Value Object `ContenidoTramite` valida que el contenido no sea vacío.
- 
-```csharp
-agregarTramite.Ejecutar(new AgregarTramiteRequest(
-    usuarioId, expId1, EtiquetaTramite.Despacho, new ContenidoTramite("")));
-```
- 
-**Salida por consola:**
-```
---Error 2: contenido de tramite vacio--
-[DominioException] El contenido del tramite no puede estar vacio
-```
- 
----
- 
-### Error 3: Sin autorización → AutorizacionException
- 
-Se usa `AutorizacionSiempreDenegadaService`, que siempre devuelve `false`, para simular un usuario sin permisos.
- 
-```csharp
-IAutorizacionService sinPermisos = new AutorizacionSiempreDenegadaService();
-var agregarSinPermiso = new AgregarExpedienteUseCase(expedienteRepo, sinPermisos);
-agregarSinPermiso.Ejecutar(new AgregarExpedienteRequest("No deberia crearse", usuarioId));
-```
- 
-**Salida por consola:**
-```
---Error 3: sin autorizacion--
-[AutorizacionException] El usuario no posee la autorización para crear expedientes
-```
- 
----
- 
-### Error 4: Expediente inexistente → EntidadNoEncontradaException
- 
-Se intenta cambiar el estado de un expediente con un ID que no existe en el sistema.
- 
-```csharp
-cambiarEstado.Ejecutar(new CambiarEstadoExpedienteRequest(
-    Guid.NewGuid(), EstadoExpediente.Finalizado, usuarioId));
-```
- 
-**Salida por consola:**
-```
---Error 4: expediente que no existe--
-[EntidadNoEncontradaException] No existe expediente con ese ID
-```
- 
----
- 
-## Persistencia en archivos de texto
- 
-Los datos se guardan en dos archivos de texto plano en el directorio de ejecución:
- 
-- `Datos de los expedientes` — un expediente por bloque de 6 líneas: Id, Carátula, FechaCreacion, FechaUltimaModificacion, UsuarioUltimoCambio, Estado.
-- `Datos de los tramites` — un trámite por bloque de 7 líneas: Id, ExpedienteId, Etiqueta, Contenido, FechaCreacion, FechaUltimaModificacion, UsuarioUltimoCambio.
-Ejemplo del archivo `Datos de los expedientes` tras ejecutar el programa:
- 
-```
-a3f1c2d4-8e5b-4a7f-9c1d-2b3e4f5a6b7c
-Expediente sobre construcción ilegal - CORREGIDO
-17/05/2026 10:32:14
-17/05/2026 10:32:21
-f7a8b9c0-1d2e-3f4a-5b6c-7d8e9f0a1b2c
-EnNotificacion
+Administrador:
+  correo: admin@sge.com
+  contraseña: admin123
+
+Usuario de prueba 1 (con permisos ExpedienteAlta y TramiteAlta):
+  correo: prueba1@sge.com
+  contraseña: 123456
+
+Usuario de prueba 2 (sin permisos):
+  correo: prueba2@sge.com
+  contraseña: 123456
 ```
