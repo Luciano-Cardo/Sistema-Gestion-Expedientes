@@ -44,9 +44,6 @@ Estas son las credenciales reales definidas en `SGE.Infraestructura/Inicializado
 
 > Las contraseñas se almacenan hasheadas en la base; las de la tabla de arriba son las
 > que hay que escribir en el endpoint de login, en texto plano.
-> 
-> Nota: En varios endpoints se requiere el campo usuarioUltimoCambio o idUsuario. Este valor corresponde al ID del usuario con el que estás logueado actualmente. Para obtenerlo, hacé GET
-> /api/usuarios con el token de administrador y copiá el ID del usuario correspondiente.
 
 ---
 
@@ -135,9 +132,7 @@ Como administrador, asignale al usuario creado en el paso 1 el permiso `Expedien
 
 ```json
 {
-  "idOrigen": "<ID del usuario administrador logueado>",
-  "idAEditar": "<ID del usuario al que se le asigna el permiso>",
-  "nuevoPermiso": "ExpedienteAlta",
+  "permiso": "ExpedienteAlta",
   "asignar": true
 }
 ```
@@ -172,8 +167,6 @@ Usando el `id` del paso 6.
 ### Paso 9 — Agregar un trámite (`POST /api/expedientes/{expedienteId}/tramites`)
 ```json
 {
-  "usuarioUltimoCambio": "<ID del usuario logueado>",
-  "expedienteId": "<ID del expediente creado en el paso 6>",
   "etiqueta": "EscritoPresentado",
   "contenido": "Se presenta el escrito inicial"
 }
@@ -201,9 +194,7 @@ Seguís logueado como `prueba1@sge.com` (que **no** tiene `TramiteModificacion`)
 Probá `PUT /api/expedientes/{expedienteId}/tramites/{tramiteId}`:
 ```json
 {
-  "idTramite": "<ID del trámite>",
-  "nuevoContenido": "Intento de modificación",
-  "idUsuario": "<ID del usuario logueado>"
+  "nuevoContenido": "Nuevo contenido del trámite"
 }
 ```
 **Esperado:** `403 Forbidden` (`AutorizacionException`), porque `prueba1` solo
@@ -227,10 +218,7 @@ Requiere `ExpedienteModificacion`. Si `prueba1` no lo tiene, otorgáselo como ad
 que en el paso 13) y luego probá:
 ```json
 {
-  {
-  "id": "<ID del expediente>",
-  "nuevaCaratula": "Expediente de prueba - CORREGIDO",
-  "usuarioUltimoCambio": "<ID del usuario logueado>"
+  "nuevaCaratula": "Expediente de prueba - CORREGIDO"
 }
 ```
 **Esperado:** `200 OK`.
@@ -238,9 +226,7 @@ que en el paso 13) y luego probá:
 ### Paso 16 — Cambiar el estado manualmente (`PUT /api/expedientes/{id}/estado`)
 ```json
 {
-  "id": "<ID del expediente>",
-  "nuevoEstado": "EnNotificacion",
-  "usuarioUltimoCambio": "<ID del usuario logueado>"
+  "nuevoEstado": "EnNotificacion"
 }
 ```
 **Esperado:** `200 OK`. El estado se actualiza sin pasar por un trámite.
@@ -254,9 +240,8 @@ Requiere `TramiteBaja` (o `ExpedienteBaja`, que la habilita indirectamente).
 Logueado como cualquier usuario, probá modificar tu propio nombre y/o contraseña:
 ```json
 {
-  "id": "<ID del usuario logueado>",
-  "contrasena": "NuevaClave456",
-  "nombre": "Usuario Prueba 1 (editado)"
+  "nombre": "Usuario Prueba 1 (editado)",
+  "contrasena": "NuevaClave456"
 }
 ```
 **Esperado:** `204 No Content`. Verificá luego que el login con la nueva contraseña
