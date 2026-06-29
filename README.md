@@ -176,8 +176,6 @@ Usando el `id` del paso 6.
 ### Paso 10 — Agregar un segundo trámite con cambio de estado automático
 ```json
 {
-  "usuarioUltimoCambio": "<ID del usuario logueado>",
-  "expedienteId": "<ID del expediente creado en el paso 6>",
   "etiqueta": "PaseAEstudio",
   "contenido": "Pase a estudio del departamento técnico"
 }
