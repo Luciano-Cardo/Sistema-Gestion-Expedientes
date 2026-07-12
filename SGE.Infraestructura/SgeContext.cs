@@ -15,10 +15,10 @@ public class SgeContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Expediente>().OwnsOne(c => c.Caratula, c =>{
+        modelBuilder.Entity<Expediente>().ComplexProperty(c => c.Caratula, c =>{
             c.Property(p => p.Valor).HasColumnName("CaratulaValor");
             });
-        modelBuilder.Entity<Tramite>().OwnsOne(c => c.Contenido, c =>{
+        modelBuilder.Entity<Tramite>().ComplexProperty(c => c.Contenido, c =>{
             c.Property(p => p.Valor).HasColumnName("ContenidoTramite");
             });
     }

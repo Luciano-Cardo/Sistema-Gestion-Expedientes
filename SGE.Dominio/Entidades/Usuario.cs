@@ -9,8 +9,10 @@ public  class Usuario{
     public String CorreoElectronico { get; private set; }
     public String ContrasenaHash { get; private set; }
     public Boolean EsAdministrador { get; private set; }
-    public List<Permiso> ListaPermisos { get; private set; } 
-    
+
+    private readonly List<Permiso> _listaPermisos = new();
+    public IReadOnlyCollection<Permiso> ListaPermisos => _listaPermisos;
+
     protected Usuario(){ }
     public Usuario(String nombre, String correoElectronico, String contrasenaHash)
     {
@@ -23,7 +25,6 @@ public  class Usuario{
         this.CorreoElectronico = correoElectronico;
         this.ContrasenaHash = contrasenaHash;
         this.EsAdministrador = false;
-        this.ListaPermisos = new List<Permiso>();
     }
 
     public void ModificarDatos(string nombre, string? contrasenaHash)
@@ -43,17 +44,17 @@ public  class Usuario{
 
     public void AsignarPermiso(Permiso permiso)
     {
-        if (!ListaPermisos.Contains(permiso))
+        if (!_listaPermisos.Contains(permiso))
         {
-            ListaPermisos.Add(permiso);
+            _listaPermisos.Add(permiso);
         }
     }
 
     public void RemoverPermiso(Permiso permiso)
     {
-        if (ListaPermisos.Contains(permiso))
+        if (_listaPermisos.Contains(permiso))
         {
-            ListaPermisos.Remove(permiso);
+            _listaPermisos.Remove(permiso);
         }
     }
 

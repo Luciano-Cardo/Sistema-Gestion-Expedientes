@@ -23,7 +23,7 @@ public class ListarUsuariosUseCase
         var usuarios = _usuarioRepo.ObtenerTodos();
     
         var usuariosDto = usuarios.Select(u => 
-            new UsuarioDTO(u.Id, u.Nombre, u.CorreoElectronico, u.EsAdministrador, u.ListaPermisos)).ToList();
+            new UsuarioDTO(u.Id, u.Nombre, u.CorreoElectronico, u.EsAdministrador, u.ListaPermisos.ToList())).ToList();
 
         return new ListarUsuariosResponse(usuariosDto);
     }

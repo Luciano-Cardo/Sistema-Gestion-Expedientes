@@ -1,3 +1,4 @@
+using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Expedientes;
 using SGE.Dominio.Expedientes;
 using SGE.Infraestructura.SQLite;
@@ -36,9 +37,11 @@ public class ExpedienteRepository : IExpedienteRepository
     public void Eliminar(Guid id)
     {
         var expediente = _context.Expedientes.FirstOrDefault(e => e.Id == id);
-        if (expediente != null)
+        if (expediente == null)
         {
-            _context.Expedientes.Remove(expediente);
+            throw new EntidadNoEncontradaException($"No existe un expediente con el ID {id}");
         }
+
+        _context.Expedientes.Remove(expediente);
     }
 }

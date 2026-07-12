@@ -1,3 +1,4 @@
+using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Interfaces;
 using SGE.Dominio.Tramites;
 using SGE.Infraestructura.SQLite;
@@ -36,9 +37,11 @@ public class TramiteRepository : ITramiteRepository
     public void Eliminar(Guid idTramiteUsuario)
     {
         var tramite = _context.Tramites.FirstOrDefault(t => t.Id == idTramiteUsuario);
-        if (tramite != null)
+        if (tramite == null)
         {
-            _context.Tramites.Remove(tramite);
+            throw new EntidadNoEncontradaException($"No existe un tramite con el ID {idTramiteUsuario}");
         }
+
+        _context.Tramites.Remove(tramite);
     }
 }
